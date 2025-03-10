@@ -36,13 +36,13 @@ export default function LoadingScreen({ onComplete }: Props) {
   }, [onComplete])
 
   return (
-    <div className="fixed inset-0 z-50 bg-black text-gray-100 flex flex-col items-center justify-center">
-      <div className="mb-4 text-4xl font-bold">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
+      <div className="mb-4 text-3xl font-bold loading-text">
         {text}
-        <span className="animate-blink ml-1"> | </span>
+        <span className="animate-blink"> |</span>
       </div>
 
-      <div className="w-[300px] h-[5px] bg-gray-800 relative overflow-hidden">
+      <div className="w-[200px] h-[4px] relative overflow-hidden">
         <Progress
           aria-label="Loading..."
           value={progressValue}
