@@ -34,10 +34,7 @@ export default function Header() {
       {/* 大屏幕下的菜单 */}
       <NavbarContent className="hidden sm:flex" justify="end">
         <NavbarItem>
-          <Link
-            to="/"
-            className="font-bold hover:text-blue-500 transition-colors duration-200"
-          >
+          <Link to="/" className="font-bold hover:text-blue-500 transition-colors duration-200">
             首页
           </Link>
         </NavbarItem>
@@ -80,7 +77,7 @@ export default function Header() {
 
       {/* 小屏幕下菜单栏 */}
       <NavbarMenu>
-        {menuItems.map((item) => (
+        {menuItems.map(item => (
           <NavbarMenuItem key={item.routerName}>
             <Link to={`/${item.routerName}`} className="font-bold">
               {item.name}

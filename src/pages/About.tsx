@@ -12,13 +12,7 @@ import { LuBriefcase } from 'react-icons/lu'
 import { MdOutlineSchool, MdOutlineTravelExplore } from 'react-icons/md'
 
 type TabKey = 'education' | 'skills' | 'project' | 'hobbies'
-type HeroUIColor =
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'secondary'
-  | 'default'
-  | 'danger'
+type HeroUIColor = 'primary' | 'success' | 'warning' | 'secondary' | 'default' | 'danger'
 
 export default function About() {
   const [activeTab, setActiveTab] = useState<TabKey>('education')
@@ -43,7 +37,7 @@ export default function About() {
       <Tabs
         aria-label="Options"
         color={tabColors[activeTab]}
-        onSelectionChange={(key) => setActiveTab(key as TabKey)}
+        onSelectionChange={key => setActiveTab(key as TabKey)}
       >
         {/* 教育 */}
         <Tab
@@ -63,13 +57,7 @@ export default function About() {
             start="2022"
             end="2026"
             description="主修课程包括数据结构、算法、操作系统、计算机网络等。参与了多个实践项目，培养了扎实的编程基础和解决问题的能力。"
-            courses={[
-              '数据结构',
-              '算法',
-              '操作系统',
-              '计算机网络',
-              '计算机组成与结构',
-            ]}
+            courses={['数据结构', '算法', '操作系统', '计算机网络', '计算机组成与结构']}
           />
           <EducationCard
             icon={<HiOutlineBookOpen className="h-8 w-8 text-blue-500" />}

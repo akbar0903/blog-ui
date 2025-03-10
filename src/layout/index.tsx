@@ -8,8 +8,8 @@ export default function Layout() {
 
   return (
     <>
-      { isLoaded && <LoadingScreen onComplete={ () => setIsLoaded(false) } /> }
-      
+      {isLoaded && <LoadingScreen onComplete={() => setIsLoaded(false)} />}
+
       <div
         className={`min-h-screen max-w-7xl mx-auto transition-opacity duration-700 ${
           !isLoaded ? 'opacity-100' : 'opacity-0'

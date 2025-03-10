@@ -21,9 +21,7 @@ export default function ProjectCard({
           <LuBriefcase className="h-8 w-8 text-amber-500" />
           <div className="flex flex-col gap-1">
             <p className="text-xl font-bold">{projectName}</p>
-            <p className="text-small text-gray-600 dark:text-gray-400">
-              前后端 | 2024年
-            </p>
+            <p className="text-small text-gray-600 dark:text-gray-400">前后端 | 2024年</p>
           </div>
         </div>
         {projectLink && (
@@ -33,9 +31,7 @@ export default function ProjectCard({
         )}
       </CardHeader>
       <CardBody className="p-4">
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {projectDescription}
-        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{projectDescription}</p>
         <div className="flex flex-wrap gap-2">
           {projectChip.map((chip, index) => (
             <Chip key={`${chip}-${index}`} color="warning" variant="flat">

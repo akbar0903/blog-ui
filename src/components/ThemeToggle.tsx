@@ -34,11 +34,7 @@ export default function ThemeToggle() {
       onPress={toggleTheme}
       aria-label={theme === 'light' ? '切换到深色模式' : '切换到浅色模式'}
     >
-      {theme === 'light' ? (
-        <FaRegMoon className="h-5 w-5" />
-      ) : (
-        <AiOutlineSun className="h-5 w-5" />
-      )}
+      {theme === 'light' ? <FaRegMoon className="h-5 w-5" /> : <AiOutlineSun className="h-5 w-5" />}
     </Button>
   )
 }

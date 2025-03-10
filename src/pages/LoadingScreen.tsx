@@ -28,7 +28,7 @@ export default function LoadingScreen({ onComplete }: Props) {
 
         setTimeout(() => {
           onComplete()
-        }, 1000);
+        }, 1000)
       }
     }, 100)
 
@@ -43,11 +43,7 @@ export default function LoadingScreen({ onComplete }: Props) {
       </div>
 
       <div className="w-[200px] h-[4px] relative overflow-hidden">
-        <Progress
-          aria-label="Loading..."
-          value={progressValue}
-          className="h-full"
-        />
+        <Progress aria-label="Loading..." value={progressValue} className="h-full" />
       </div>
     </div>
   )

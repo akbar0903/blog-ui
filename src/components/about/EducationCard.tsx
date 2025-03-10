@@ -32,9 +32,7 @@ export default function EducationCard({
         </div>
       </CardHeader>
       <CardBody className="p-4">
-        <p className="text-gray-600 dark:text-gray-400">
-          {description}
-        </p>
+        <p className="text-gray-600 dark:text-gray-400">{description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {courses.map((course, index) => (
             <Chip key={`${course}-${index}`} color="primary" variant="flat">

@@ -2,16 +2,16 @@ import { Card, CardBody, CardHeader, Progress } from '@heroui/react'
 import { IoCode } from 'react-icons/io5'
 
 type SkillsAndLevel = {
-  skill: string 
+  skill: string
   level: number
 }
 
 type Props = {
-  title: string 
+  title: string
   skills: SkillsAndLevel[]
 }
 
-export default function SkillsCard({title, skills}: Props) {
+export default function SkillsCard({ title, skills }: Props) {
   return (
     <Card fullWidth className="border-l-4 border-l-green-500">
       <CardHeader className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-900/20 pb-2">
