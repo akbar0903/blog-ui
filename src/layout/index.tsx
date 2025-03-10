@@ -9,15 +9,14 @@ export default function Layout() {
   return (
     <>
       {isLoaded && <LoadingScreen onComplete={() => setIsLoaded(false)} />}
-
       <div
-        className={`min-h-screen max-w-7xl mx-auto transition-opacity duration-700 ${
+        className={`min-h-screen transition-opacity duration-700 ${
           !isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <Header />
 
-        <main className="w-full px-6">
+        <main className="max-w-7xl mx-auto px-6">
           <Outlet />
         </main>
 

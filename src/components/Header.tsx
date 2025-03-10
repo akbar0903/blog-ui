@@ -28,7 +28,7 @@ export default function Header() {
   ]
 
   return (
-    <Navbar maxWidth="full" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="xl" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       {/* logo */}
       <NavbarBrand>
         <Link to="/">

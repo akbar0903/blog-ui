@@ -10,6 +10,8 @@ import { HiOutlineBookOpen } from 'react-icons/hi'
 import { IoCode } from 'react-icons/io5'
 import { LuBriefcase } from 'react-icons/lu'
 import { MdOutlineSchool, MdOutlineTravelExplore } from 'react-icons/md'
+import { GrContact } from 'react-icons/gr'
+import ContactMeCard from '@/components/about/ContactMeCard.tsx'
 
 type TabKey = 'education' | 'skills' | 'project' | 'hobbies'
 type HeroUIColor = 'primary' | 'success' | 'warning' | 'secondary' | 'default' | 'danger'
@@ -29,10 +31,6 @@ export default function About() {
       <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
         About Me
       </h1>
-
-      <p className="dark:text-gray-400 text-lg max-w-lg">
-        你好！我是一位充满激情的开发者，致力于构建优雅且高效的解决方案。我喜欢探索新技术，解决复杂问题，并不断学习成长。
-      </p>
 
       <Tabs
         aria-label="Options"
@@ -181,6 +179,20 @@ export default function About() {
             title="音乐"
             description="我热爱音乐，它是我生活中不可或缺的一部分。不同的音乐风格能让我感受到不同的情绪和氛围。"
           />
+        </Tab>
+
+        {/*联系我*/}
+        <Tab
+          key="contact"
+          title={
+            <div className="flex items-center space-x-2">
+              <GrContact className="h-5 w-5" />
+              <span>联系我</span>
+            </div>
+          }
+          className="w-full"
+        >
+          <ContactMeCard />
         </Tab>
       </Tabs>
     </section>
