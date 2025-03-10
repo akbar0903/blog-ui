@@ -7,19 +7,28 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@heroui/react'
-import { Link } from 'react-router-dom'
-import ThemeToggle from './ThemeToggle'
+import { Link, useLocation } from 'react-router-dom'
+import ThemeToggle from '@/components/ThemeToggle'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+
+  // 监听路由变化，当路由变化时关闭菜单
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [location])
+
   const menuItems = [
-    { name: '首页', routerName: '' },
-    { name: '关于', routerName: 'about' },
-    { name: '项目', routerName: 'project' },
-    { name: '联系我', routerName: 'contact' },
+    { name: '首页', routerName: '/' },
+    { name: '关于', routerName: '/about' },
+    { name: '项目', routerName: '/project' },
+    { name: '联系我', routerName: '/contact' },
   ]
 
   return (
-    <Navbar maxWidth="full">
+    <Navbar maxWidth="full" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       {/* logo */}
       <NavbarBrand>
         <Link to="/">
@@ -79,7 +88,7 @@ export default function Header() {
       <NavbarMenu>
         {menuItems.map(item => (
           <NavbarMenuItem key={item.routerName}>
-            <Link to={`/${item.routerName}`} className="font-bold">
+            <Link to={item.routerName} onClick={() => setIsMenuOpen(false)} className="font-bold">
               {item.name}
             </Link>
           </NavbarMenuItem>
