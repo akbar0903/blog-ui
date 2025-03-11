@@ -5,7 +5,10 @@
 html {
   min-height: 100vh;
   font-size: 16px;
-  font-family: Microsoft YaHei, Arial, sans-serif;
+  font-family:
+    Microsoft YaHei,
+    Arial,
+    sans-serif;
   @apply bg-gradient-to-b from-primary/15 via-background to-success-100/20;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -17,22 +20,37 @@ body {
 
 /* 代码进度条字体 */
 .loading-text {
-  font-family: JetBrains Mono, sans-serif;
+  font-family:
+    JetBrains Mono,
+    sans-serif;
 }
 
 @layer utilities {
   /* 光标动画 */
   @keyframes blink {
-    0%, 100%  {
+    0%,
+    100% {
       opacity: 0;
     }
     50% {
       opacity: 1;
     }
-
   }
-
   .animate-blink {
     animation: blink 0.8s step-end infinite;
+  }
+
+  /* 技能轮播图 */
+  @keyframes carousel {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-carousel {
+    animation: carousel linear infinite;
   }
 }

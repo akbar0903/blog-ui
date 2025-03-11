@@ -6,7 +6,6 @@ type Props = {
   icon: ReactNode
   title: string
   description: string
-  className?: string
 }
 
 export default function HobbyCard({
@@ -14,10 +13,9 @@ export default function HobbyCard({
   bgStyle = 'from-purple-400 to-pink-500',
   title,
   description,
-  className,
 }: Props) {
   return (
-    <Card isHoverable={true} className={className}>
+    <Card isHoverable={true}>
       <CardHeader
         className={`flex items-center justify-center p-4 h-32 bg-gradient-to-r ${bgStyle}`}
       >

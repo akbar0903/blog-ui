@@ -14,10 +14,10 @@ export default function Home() {
 
         <div className="flex justify-center space-x-4">
           <Button as={Link} color="primary" showAnchorIcon href="/project" size="lg">
-            浏览项目
+            浏览文章
           </Button>
           <Button as={Link} color="primary" variant="flat" showAnchorIcon href="/contact" size="lg">
-            联系我
+            关于我
           </Button>
         </div>
       </div>
