@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-blue-50 dark:bg-slate-900 py-8 px-6 mt-16 border-t border-blue-100 dark:border-slate-800">
+    <footer className="w-full bg-blue-50 dark:bg-slate-900 py-8 px-6 mt-10 md:mt-10 border-t border-blue-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo和描述 */}

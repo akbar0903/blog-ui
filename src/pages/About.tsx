@@ -13,7 +13,7 @@ import ContactMeCard from '@/components/about/ContactMeCard.tsx'
 
 export default function About() {
   return (
-    <section className="min-h-screen flex flex-col items-center space-y-5 w-full mx-auto py-20">
+    <section className="min-h-screen flex flex-col items-center space-y-5 w-full mx-auto py-10 md:py-20">
       <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
         About Me
       </h1>

@@ -36,8 +36,3 @@ body {
     animation: blink 0.8s step-end infinite;
   }
 }
-
-/* 设置主容器的高度 */
-.content-container {
-  height: calc(100vh - 4rem);
-}

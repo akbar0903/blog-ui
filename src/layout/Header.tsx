@@ -23,8 +23,6 @@ export default function Header() {
   const menuItems = [
     { name: '首页', routerName: '/' },
     { name: '关于', routerName: '/about' },
-    { name: '项目', routerName: '/project' },
-    { name: '联系我', routerName: '/contact' },
   ]
 
   return (
@@ -53,22 +51,6 @@ export default function Header() {
             className="font-bold hover:text-blue-500 transition-colors duration-200"
           >
             关于
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            to="/project"
-            className="font-bold hover:text-blue-500 transition-colors duration-200"
-          >
-            项目
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            to="/contact"
-            className="font-bold hover:text-blue-500 transition-colors duration-200"
-          >
-            联系我
           </Link>
         </NavbarItem>
         <NavbarItem>

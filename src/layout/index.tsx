@@ -1,8 +1,8 @@
 import LoadingScreen from '@/pages/LoadingScreen'
 import { useState } from 'react'
-import Header from '@/components/Header'
-import { Outlet } from 'react-router-dom'
-import Footer from '@/components/Footer'
+import Header from '@/layout/Header'
+import Footer from '@/layout/Footer'
+import MainContent from './MainContent'
 
 export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -15,9 +15,7 @@ export default function Layout() {
       >
         <Header />
 
-        <main className="max-w-7xl mx-auto px-6">
-          <Outlet />
-        </main>
+        <MainContent />
 
         <Footer />
       </div>
