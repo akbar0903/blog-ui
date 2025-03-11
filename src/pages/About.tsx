@@ -1,9 +1,7 @@
-import EducationCard from '@/components/about/EducationCard'
 import HobbyCard from '@/components/about/HobbyCard'
 import ProjectCard from '@/components/about/ProjectCard'
 import SkillsCard from '@/components/about/SkillsCard'
 import { Tabs, Tab } from '@heroui/react'
-import { useState } from 'react'
 import { BsFilm } from 'react-icons/bs'
 import { FaMusic, FaRegHeart } from 'react-icons/fa'
 import { HiOutlineBookOpen } from 'react-icons/hi'
@@ -13,71 +11,24 @@ import { MdOutlineSchool, MdOutlineTravelExplore } from 'react-icons/md'
 import { GrContact } from 'react-icons/gr'
 import ContactMeCard from '@/components/about/ContactMeCard.tsx'
 
-type TabKey = 'education' | 'skills' | 'project' | 'hobbies'
-type HeroUIColor = 'primary' | 'success' | 'warning' | 'secondary' | 'default' | 'danger'
-
 export default function About() {
-  const [activeTab, setActiveTab] = useState<TabKey>('education')
-  // Record是React内置的对象声明类型，可以声明类型安全的对象
-  const tabColors: Record<TabKey, HeroUIColor> = {
-    education: 'primary',
-    skills: 'success',
-    project: 'warning',
-    hobbies: 'secondary',
-  }
-
   return (
-    <section className="content-container flex flex-col items-center space-y-5 w-full mx-auto py-20">
+    <section className="min-h-screen flex flex-col items-center space-y-5 w-full mx-auto py-20">
       <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
         About Me
       </h1>
 
-      <Tabs
-        aria-label="Options"
-        color={tabColors[activeTab]}
-        onSelectionChange={key => setActiveTab(key as TabKey)}
-      >
-        {/* 教育 */}
-        <Tab
-          key="education"
-          title={
-            <div className="flex items-center space-x-2">
-              <MdOutlineSchool className="h-5 w-5" />
-              <span>教育</span>
-            </div>
-          }
-          className="w-full flex flex-col md:flex-row gap-8"
-        >
-          <EducationCard
-            icon={<MdOutlineSchool className="h-8 w-8 text-blue-500" />}
-            major="计算机科学与技术"
-            school="三峡大学"
-            start="2022"
-            end="2026"
-            description="主修课程包括数据结构、算法、操作系统、计算机网络等。参与了多个实践项目，培养了扎实的编程基础和解决问题的能力。"
-            courses={['数据结构', '算法', '操作系统', '计算机网络', '计算机组成与结构']}
-          />
-          <EducationCard
-            icon={<HiOutlineBookOpen className="h-8 w-8 text-blue-500" />}
-            major="高中"
-            school="天津市弟四十五中学"
-            start="2018"
-            end="2022"
-            description="主修课程包括数学、物理、化学、生物等。参与了多个实践项目，培养了扎实的编程基础和解决问题的能力。"
-            courses={['数学', '物理', '化学', '生物']}
-          />
-        </Tab>
-
+      <Tabs aria-label="Options" color="primary">
         {/* 技能 */}
         <Tab
           key="skills"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <IoCode className="h-5 w-5" />
               <span>技能</span>
             </div>
           }
-          className="w-full flex flex-col md:flex-row gap-8"
+          className="w-full flex flex-col md:flex-row gap-4 sm:gap-8"
         >
           <SkillsCard
             title="前端开发"
@@ -105,12 +56,12 @@ export default function About() {
         <Tab
           key="project"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <LuBriefcase className="h-5 w-5" />
               <span>项目</span>
             </div>
           }
-          className="w-full flex flex-col gap-4"
+          className="w-full flex flex-col gap-4 sm:gap-8"
         >
           <ProjectCard
             projectName="苍穹外卖"
@@ -130,7 +81,7 @@ export default function About() {
         <Tab
           key="hobbies"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <FaRegHeart className="h-5 w-5" />
               <span>爱好</span>
             </div>
@@ -185,9 +136,9 @@ export default function About() {
         <Tab
           key="contact"
           title={
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <GrContact className="h-5 w-5" />
-              <span>联系我</span>
+              <span>联系</span>
             </div>
           }
           className="w-full"

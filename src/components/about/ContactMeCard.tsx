@@ -8,7 +8,7 @@ import { CiLocationArrow1 } from 'react-icons/ci'
 
 export default function ContactMeCard() {
   return (
-    <div className="flex flex-col md:flex-row gap-8">
+    <div className="flex flex-col md:flex-row gap-4 sm:gap-8">
       <Card fullWidth={true} className="border-l-4 border-l-blue-500">
         <CardHeader className="flex items-center gap-3 p-4">
           <p className="text-xl font-bold">联系方式</p>
@@ -42,34 +42,13 @@ export default function ContactMeCard() {
             </div>
           </div>
           <div className="flex items-center justify-center gap-4 p-2">
-            <Button
-              as={Link}
-              isIconOnly
-              href="#"
-              className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white"
-              radius="full"
-              size="lg"
-            >
+            <Button as={Link} isIconOnly href="#" color="primary" radius="full" size="lg">
               <LuGithub className="w-5 h-5 text-white" />
             </Button>
-            <Button
-              as={Link}
-              isIconOnly
-              href="#"
-              className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white"
-              radius="full"
-              size="lg"
-            >
+            <Button as={Link} isIconOnly href="#" color="primary" radius="full" size="lg">
               <FaBilibili className="w-5 h-5 text-white" />
             </Button>
-            <Button
-              as={Link}
-              isIconOnly
-              href="#"
-              className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white"
-              radius="full"
-              size="lg"
-            >
+            <Button as={Link} isIconOnly href="#" color="primary" radius="full" size="lg">
               <SiGitee className="w-5 h-5 text-white" />
             </Button>
           </div>
@@ -94,7 +73,7 @@ export default function ContactMeCard() {
             placeholder="请输入您的留言..."
           />
           <div className="flex items-center justify-center mt-3">
-            <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white">
+            <Button color="primary" className="w-full">
               <CiLocationArrow1 className="w-5 h-5" />
               发送消息
             </Button>

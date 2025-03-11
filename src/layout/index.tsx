@@ -2,6 +2,7 @@ import LoadingScreen from '@/pages/LoadingScreen'
 import { useState } from 'react'
 import Header from '@/components/Header'
 import { Outlet } from 'react-router-dom'
+import Footer from '@/components/Footer'
 
 export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -10,9 +11,7 @@ export default function Layout() {
     <>
       {isLoaded && <LoadingScreen onComplete={() => setIsLoaded(false)} />}
       <div
-        className={`min-h-screen transition-opacity duration-700 ${
-          !isLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`min-h-screen transition-opacity duration-700 ${!isLoaded ? 'opacity-100' : 'opacity-0'}`}
       >
         <Header />
 
@@ -20,7 +19,7 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   )
