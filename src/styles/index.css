@@ -39,18 +39,4 @@ body {
   .animate-blink {
     animation: blink 0.8s step-end infinite;
   }
-
-  /* 技能轮播图 */
-  @keyframes carousel {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-  .animate-carousel {
-    animation: carousel linear infinite;
-  }
 }
