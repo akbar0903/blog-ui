@@ -1,5 +1,5 @@
-import ArticleList from '@/components/ArticleList'
-import Sidebar from '@/components/Sidebar'
+import ArticleList from '@/components/article/ArticleList'
+import Sidebar from '@/components/sidebar/Sidebar'
 
 export default function Home() {
   return (
@@ -8,14 +8,14 @@ export default function Home() {
         Hi, 我是艾克
       </h1>
 
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-8 w-full">
         {/* Main content area - article list */}
-        <div className="lg:w-2/3">
+        <div className="lg:w-3/4">
           <ArticleList />
         </div>
 
         {/* Sidebar - only visible on large screens */}
-        <div className="hidden lg:block lg:w-1/3">
+        <div className="hidden lg:block lg:w-1/4">
           <Sidebar />
         </div>
       </div>
