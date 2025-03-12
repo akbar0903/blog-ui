@@ -1,4 +1,5 @@
 import ArticleCard from '@/components/article/ArticleCard'
+import { Pagination } from '@heroui/react'
 
 export default function ArticleCardList() {
   const articles = [
@@ -45,10 +46,15 @@ export default function ArticleCardList() {
   ]
 
   return (
-    <div className="space-y-6">
-      {articles.map((article, index) => (
-        <ArticleCard key={article.id} article={article} isReversed={index % 2 !== 0} />
-      ))}
-    </div>
+    <>
+      <div className="space-y-6">
+        {articles.map((article, index) => (
+          <ArticleCard key={article.id} article={article} isReversed={index % 2 !== 0} />
+        ))}
+      </div>
+      <div className="flex justify-center pt-8 sm:pt-10">
+        <Pagination showControls showShadow siblings={0} initialPage={1} total={10} />
+      </div>
+    </>
   )
 }
