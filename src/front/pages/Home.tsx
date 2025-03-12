@@ -1,5 +1,5 @@
-import ArticleList from '@/components/article/ArticleList'
-import Sidebar from '@/components/sidebar/Sidebar'
+import ArticleList from '@/front/components/article/ArticleList.tsx'
+import Sidebar from '@/front/components/sidebar/Sidebar.tsx'
 
 export default function Home() {
   return (

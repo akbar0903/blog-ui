@@ -8,7 +8,7 @@ import {
   NavbarMenuToggle,
 } from '@heroui/react'
 import { Link, useLocation } from 'react-router-dom'
-import ThemeToggle from '@/components/ThemeToggle'
+import ThemeToggle from '@/front/components/ThemeToggle.tsx'
 import { useEffect, useState } from 'react'
 
 export default function Header() {
@@ -23,6 +23,7 @@ export default function Header() {
   const menuItems = [
     { name: '首页', routerName: '/' },
     { name: '关于', routerName: '/about' },
+    { name: '后台', routerName: '/admin' },
   ]
 
   return (
@@ -51,6 +52,14 @@ export default function Header() {
             className="font-bold hover:text-blue-500 transition-colors duration-200"
           >
             关于
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link
+            to="/admin"
+            className="font-bold hover:text-blue-500 transition-colors duration-200"
+          >
+            后台
           </Link>
         </NavbarItem>
         <NavbarItem>

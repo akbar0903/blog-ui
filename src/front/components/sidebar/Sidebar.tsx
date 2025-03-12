@@ -1,7 +1,7 @@
-import ProfileCard from '@/components/sidebar/ProfileCard'
-import CategoriesCard from './CategoriesCard'
-import TagsCard from './TagsCard'
-import RecentArticlesCard from './RecentArticlesCard'
+import ProfileCard from '@/front/components/sidebar/ProfileCard.tsx'
+import CategoriesCard from './CategoriesCard.tsx'
+import TagsCard from './TagsCard.tsx'
+import RecentArticlesCard from './RecentArticlesCard.tsx'
 
 const articles = [
   {

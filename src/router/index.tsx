@@ -1,12 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Layout from '@/layout'
-import Home from '@/pages/Home'
-import About from '@/pages/About'
+import FrontLayout from '@/front/layout'
+import Home from '@/front/pages/Home'
+import About from '@/front/pages/About'
+import Login from '@/admin/pages/Login.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <FrontLayout />,
     children: [
       {
         path: '/',
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
         element: <About />,
       },
     ],
+  },
+
+  {
+    path: '/admin',
+    element: <Login />,
   },
 ])
 

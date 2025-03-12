@@ -1,6 +1,6 @@
-import HobbyCard from '@/components/about/HobbyCard'
-import ProjectCard from '@/components/about/ProjectCard'
-import SkillsCard from '@/components/about/SkillsCard'
+import HobbyCard from '@/front/components/about/HobbyCard.tsx'
+import ProjectCard from '@/front/components/about/ProjectCard.tsx'
+import SkillsCard from '@/front/components/about/SkillsCard.tsx'
 import { Tabs, Tab } from '@heroui/react'
 import { BsFilm } from 'react-icons/bs'
 import { FaMusic, FaRegHeart } from 'react-icons/fa'
@@ -9,8 +9,8 @@ import { IoCode } from 'react-icons/io5'
 import { LuBriefcase } from 'react-icons/lu'
 import { MdOutlineSchool, MdOutlineTravelExplore } from 'react-icons/md'
 import { GrContact } from 'react-icons/gr'
-import ContactMeCard from '@/components/about/ContactMeCard.tsx'
-import SkillsCarouselCard from '@/components/about/SkillsCarouselCard'
+import ContactMeCard from '@/front/components/about/ContactMeCard.tsx'
+import SkillsCarouselCard from '@/front/components/about/SkillsCarouselCard.tsx'
 
 export default function About() {
   return (

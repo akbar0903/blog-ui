@@ -1,4 +1,4 @@
-import ArticleCard from '@/components/article/ArticleCard'
+import ArticleCard from '@/front/components/article/ArticleCard.tsx'
 import { Pagination } from '@heroui/react'
 
 export default function ArticleCardList() {
