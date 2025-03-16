@@ -12,7 +12,7 @@ import { GrContact } from 'react-icons/gr'
 import ContactMeCard from '@/front/components/about/ContactMeCard.tsx'
 import SkillsCarouselCard from '@/front/components/about/SkillsCarouselCard.tsx'
 
-export default function About() {
+export default function FrontAbout() {
   return (
     <section className="min-h-screen flex flex-col items-center space-y-5 w-full mx-auto py-10">
       <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">

@@ -14,7 +14,7 @@ export default function Sidebar() {
       </div>
 
       <Listbox className="p-2" variant="flat" aria-label="sidebar">
-        <ListboxItem key="home" className="gap-2 p-3" textValue="首页" href="/admin/home">
+        <ListboxItem key="home" className="gap-2 p-3" textValue="首页" href="/admin">
           <div className="flex items-center gap-2">
             <AiOutlineHome className="h-4 w-4" />
             <span>首页</span>
