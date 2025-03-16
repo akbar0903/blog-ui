@@ -4,7 +4,7 @@ import { AdminState, ApiResponse, LoginForm } from '@/types'
 
 // 初始状态
 const initialState: AdminState = {
-  token: '',
+  token: localStorage.getItem('token_key') || '',
   adminInfo: {
     id: 0,
     username: '',
@@ -28,6 +28,8 @@ const adminStore = createSlice({
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload
+      // 保存到localstorage
+      localStorage.setItem('token-key', action.payload)
     },
     setAdminInfo: (state, action) => {
       state.adminInfo = action.payload
