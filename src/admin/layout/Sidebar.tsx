@@ -5,17 +5,20 @@ import { LuTag } from 'react-icons/lu'
 import { PiImagesLight } from 'react-icons/pi'
 import { FaRegUser } from 'react-icons/fa'
 
-export default function Sidebar() {
-  return (
-    <div className="hidden md:block min-h-screen w-32 bg-white dark:bg-zinc-900">
-      {/*sidebar头部logo*/}
-      <div className="h-16 flex items-center justify-center">
-        <span className="font-bold text-xl text-blue-500 dark:text-white">ADMIN</span>
-      </div>
+type SidebarProps = {
+  isOpen: boolean
+}
 
-      <Listbox className="p-2" variant="flat" aria-label="sidebar">
+export default function Sidebar({ isOpen }: SidebarProps) {
+  return (
+    <div
+      className={`min-h-screen w-40 bg-white dark:bg-zinc-900 fixed top-16 left-0 transition-transform duration-200 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}
+    >
+      <Listbox className="pt-2 px-4" variant="flat" aria-label="sidebar">
         <ListboxItem key="home" className="gap-2 p-3" textValue="首页" href="/admin">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 font-bold">
             <AiOutlineHome className="h-4 w-4" />
             <span>首页</span>
           </div>

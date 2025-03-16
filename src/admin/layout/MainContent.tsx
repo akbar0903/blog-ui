@@ -1,12 +1,20 @@
 import { Outlet } from 'react-router-dom'
 import { Suspense } from 'react'
 
-export default function MainContent() {
+type Props = {
+  isOpen: boolean
+}
+
+export default function MainContent({ isOpen }: Props) {
   return (
-    <div className="flex-1">
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
+    <div
+      className={` ${isOpen ? 'ml-40' : 'ml-0'} h-[calc(100vh-64px)] bg-white dark:bg-zinc-900 transition-all duration-300 ease-in-out overflow-hidden`}
+    >
+      <div className="main-container p-5 bg-slate-100 dark:bg-zinc-950 h-full border-tl rounded-tl-[30px] overflow-y-auto">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </div>
     </div>
   )
 }

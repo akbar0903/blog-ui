@@ -6,5 +6,37 @@ export default function AdminHome() {
     request.get('/admin/info', { params: { id: 1 } })
   }, [])
 
-  return <div>Home</div>
+  return (
+    <>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+      <h1 className="text-4xl">hello</h1>
+    </>
+  )
 }
