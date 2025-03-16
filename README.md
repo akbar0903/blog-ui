@@ -23,3 +23,5 @@ animate-blink是用于实现闪烁效果的动画类。
 - ci：CI 配置或脚本更改（Continuous Integration）
 - chore：杂项（不修改 src 或 test 的更改）
 - revert：回滚之前的提交（Revert）
+
+## 2.路由守卫（高阶组件）
