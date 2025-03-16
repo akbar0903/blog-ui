@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardHeader, Input } from '@heroui/react'
+import { Button, Card, CardBody, CardHeader, Input, Link } from '@heroui/react'
 import ThemeToggle from '@/front/components/ThemeToggle.tsx'
 
 export default function Login() {
@@ -26,7 +26,9 @@ export default function Login() {
             placeholder="请输入密码"
             type="text"
           />
-          <Button color="primary">登录</Button>
+          <Button as={Link} href="/admin" color="primary">
+            登录
+          </Button>
         </CardBody>
       </Card>
     </div>

@@ -56,7 +56,7 @@ export default function Header() {
         </NavbarItem>
         <NavbarItem>
           <Link
-            to="/admin"
+            to="/login"
             className="font-bold hover:text-blue-500 transition-colors duration-200"
           >
             后台

@@ -73,6 +73,7 @@ export default function ArticleCard({ article, isReversed }: ArticleCardProps) {
               width={400}
               height={240}
               radius="none"
+              isZoomed
               className="object-cover h-full w-full"
             />
           </div>
@@ -161,6 +162,7 @@ export default function ArticleCard({ article, isReversed }: ArticleCardProps) {
               width={400}
               height={240}
               radius="none"
+              isZoomed
               className="object-cover h-full w-full"
             />
           </div>

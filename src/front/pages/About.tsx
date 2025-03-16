@@ -99,37 +99,31 @@ export default function About() {
               bgStyle="from-purple-400 to-pink-500 dark:from-purple-800 dark:to-pink-900"
               icon={<IoCode className="h-16 w-16 text-white" />}
               title="编程"
-              description=" 我热爱编程，经常在业余时间研究新技术和框架。我特别喜欢前端开发，尤其是React和TypeScript。"
             />
             <HobbyCard
               bgStyle="from-green-400 to-blue-500 dark:from-green-800 dark:to-blue-900"
               icon={<HiOutlineBookOpen className="h-16 w-16 text-white" />}
               title="读书"
-              description="我喜欢读书，尤其是技术书籍。我经常阅读技术博客和论坛，了解最新的技术趋势和实践经验。"
             />
             <HobbyCard
               bgStyle="from-red-400 to-orange-500 dark:from-red-800 dark:to-orange-900"
               icon={<MdOutlineSchool className="h-16 w-16 text-white" />}
               title="学习"
-              description="我喜欢学习，尤其是学习新的知识和技能。我经常参加培训和研讨会，了解最新的技术趋势和实践经验。"
             />
             <HobbyCard
               bgStyle="from-yellow-400 to-orange-500 dark:from-yellow-800 dark:to-orange-900"
               icon={<MdOutlineTravelExplore className="h-16 w-16 text-white" />}
               title="旅行"
-              description="我热衷于旅行，探索不同的地方和文化。每一次旅行都是一次新的体验，让我开阔视野，丰富人生。"
             />
             <HobbyCard
               bgStyle="from-blue-400 to-purple-500 dark:from-blue-800 dark:to-purple-900"
               icon={<BsFilm className="h-16 w-16 text-white" />}
               title="电影"
-              description="我喜欢看电影，各种类型的电影都能吸引我。电影是一种艺术形式，能带给我不同的情感体验和思考。"
             />
             <HobbyCard
               bgStyle="from-pink-400 to-red-500 dark:from-pink-800 dark:to-red-900"
               icon={<FaMusic className="h-16 w-16 text-white" />}
               title="音乐"
-              description="我热爱音乐，它是我生活中不可或缺的一部分。不同的音乐风格能让我感受到不同的情绪和氛围。"
             />
           </div>
         </Tab>

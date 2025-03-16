@@ -1,8 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { lazy } from 'react'
 import FrontLayout from '@/front/layout'
-import Home from '@/front/pages/Home'
-import About from '@/front/pages/About'
-import Login from '@/admin/pages/Login.tsx'
+import AdminLayout from '@/admin/layout'
+
+const FrontHome = lazy(() => import('@/front/pages/Home'))
+const About = lazy(() => import('@/front/pages/About'))
+
+const Login = lazy(() => import('@/admin/pages/Login.tsx'))
+const AdminHome = lazy(() => import('@/admin/pages/Home'))
+const Category = lazy(() => import('@/admin/pages/Category'))
+const Tag = lazy(() => import('@/admin/pages/Tag'))
+const Image = lazy(() => import('@/admin/pages/Image'))
+const Account = lazy(() => import('@/admin/pages/Account'))
 
 const router = createBrowserRouter([
   {
@@ -10,8 +19,8 @@ const router = createBrowserRouter([
     element: <FrontLayout />,
     children: [
       {
-        path: '/',
-        element: <Home />,
+        index: true,
+        element: <FrontHome />,
       },
       {
         path: '/about',
@@ -21,8 +30,34 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/admin',
+    path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <AdminHome />,
+      },
+      {
+        path: 'category',
+        element: <Category />,
+      },
+      {
+        path: 'tag',
+        element: <Tag />,
+      },
+      {
+        path: 'image',
+        element: <Image />,
+      },
+      {
+        path: 'account',
+        element: <Account />,
+      },
+    ],
   },
 ])
 
