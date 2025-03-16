@@ -1,10 +1,10 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit'
-import request from '@/utils/request.ts'
 import { AdminState, ApiResponse, LoginForm } from '@/types'
+import { request, setToken as _setToken, getToken } from '@/utils/index.ts'
 
 // 初始状态
 const initialState: AdminState = {
-  token: localStorage.getItem('token_key') || '',
+  token: getToken() || '',
   adminInfo: {
     id: 0,
     username: '',
@@ -29,7 +29,7 @@ const adminStore = createSlice({
     setToken: (state, action) => {
       state.token = action.payload
       // 保存到localstorage
-      localStorage.setItem('token-key', action.payload)
+      _setToken(action.payload)
     },
     setAdminInfo: (state, action) => {
       state.adminInfo = action.payload
