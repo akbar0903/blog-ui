@@ -7,7 +7,7 @@ const store = configureStore({
   },
 })
 
-// 这是 store.dispatch 的类型，自动支持 Redux Toolkit 的 thunk action。
+// 用dispatch类型定义
 export type AppDispatch = typeof store.dispatch
 
 export default store
