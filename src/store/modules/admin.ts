@@ -56,14 +56,20 @@ export const fetchLogin = (loginForm: LoginForm) => {
 // 异步获取用户信息
 export const fetchLoginAdminInfo = () => {
   return async (dispatch: Dispatch) => {
-    const response: ApiResponse = await request.get('/admin/current-admin-info')
-    if (response.code === 0) {
-      throw new Error(response.msg)
+    try {
+      const response: ApiResponse = await request.get('/admin/current-admin-info')
+      if (response.code === 0) {
+        throw new Error(response.msg)
+      }
+      if (response.data) {
+        dispatch(setLoginAdminInfo(response.data))
+      }
+      return response.data
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      throw new Error(error)
     }
-    if (response.data) {
-      dispatch(setLoginAdminInfo(response.data))
-    }
-    return response.data
   }
 }
 

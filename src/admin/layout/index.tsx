@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store'
 import { fetchLoginAdminInfo } from '@/store/modules/admin.ts'
+import { ERROR_MESSAGES } from '@/message/message.ts'
 
 export default function Layout() {
   const [isOpen, setIsOpen] = useState(true)
@@ -12,7 +13,14 @@ export default function Layout() {
 
   // 获取管理员信息
   useEffect(() => {
-    dispatch(fetchLoginAdminInfo())
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchLoginAdminInfo())
+      } catch (error) {
+        console.error(ERROR_MESSAGES.TOKEN_EXPIRED, error)
+      }
+    }
+    fetchData()
   }, [dispatch])
 
   // 管理员名字和角色

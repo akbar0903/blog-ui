@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { fetchLogin } from '@/store/modules/admin.ts'
 import { LoginForm, LoginFormErrors } from '@/types'
 import { AppDispatch } from '@/store'
+import { ERROR_MESSAGES, SUCCESS_MESSAGE } from '@/message/message.ts'
 
 export default function Login() {
   const [errors, setErrors] = useState({})
@@ -27,12 +28,12 @@ export default function Login() {
     // 验证表单
     const newErrors: LoginFormErrors = {}
     if (!data.username) {
-      newErrors.username = '请输入用户名'
+      newErrors.username = ERROR_MESSAGES.USERNAME_EMPTY
     }
     if (!data.password) {
-      newErrors.password = '请输入密码'
+      newErrors.password = ERROR_MESSAGES.PASSWORD_EMPTY
     } else if (data.password.length < 6) {
-      newErrors.password = '密码不能小于6个字符'
+      newErrors.password = ERROR_MESSAGES.PASSWORD_TOO_SHORT
     }
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -41,11 +42,11 @@ export default function Login() {
 
     try {
       await dispatch(fetchLogin(data))
-      addToast({ title: '登录成功', color: 'success' })
+      addToast({ title: SUCCESS_MESSAGE.LOGIN_SUCCESS, color: 'success' })
       navigate('/admin')
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : String(error)
-      addToast({ title: '登录失败', description: errorMessage, color: 'danger' })
+      addToast({ title: ERROR_MESSAGES.LOGIN_ERROR, description: errorMessage, color: 'danger' })
       setErrors({ username: '' })
     }
   }
