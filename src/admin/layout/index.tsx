@@ -1,17 +1,10 @@
 import Header from '@/admin/layout/Header.tsx'
 import MainContent from '@/admin/layout/MainContent.tsx'
 import Sidebar from '@/admin/layout/Sidebar.tsx'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function Layout() {
-  const [isOpen, setIsOpen] = useState(() => {
-    return localStorage.getItem('sidebar-open') === 'true' || false
-  })
-
-  useEffect(() => {
-    localStorage.setItem('sidebar-open', isOpen.toString())
-  }, [isOpen])
-
+  const [isOpen, setIsOpen] = useState(true)
   const toggleSidebar = () => {
     setIsOpen(!isOpen)
   }

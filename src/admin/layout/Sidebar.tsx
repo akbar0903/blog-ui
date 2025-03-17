@@ -1,13 +1,41 @@
-import { Listbox, ListboxItem } from '@heroui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { MdOutlineCategory } from 'react-icons/md'
 import { LuTag } from 'react-icons/lu'
 import { PiImagesLight } from 'react-icons/pi'
 import { FaRegUser } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 
 type SidebarProps = {
   isOpen: boolean
 }
+
+const menuItems = [
+  {
+    label: '首页',
+    href: '/admin',
+    icon: <AiOutlineHome className="h-4 w-4" />,
+  },
+  {
+    label: '分类',
+    href: '/admin/category',
+    icon: <MdOutlineCategory className="h-4 w-4" />,
+  },
+  {
+    label: '标签',
+    href: '/admin/tag',
+    icon: <LuTag className="h-4 w-4" />,
+  },
+  {
+    label: '图片',
+    href: '/admin/image',
+    icon: <PiImagesLight className="h-4 w-4" />,
+  },
+  {
+    label: '账号',
+    href: '/admin/account',
+    icon: <FaRegUser className="h-4 w-4" />,
+  },
+]
 
 export default function Sidebar({ isOpen }: SidebarProps) {
   return (
@@ -16,38 +44,22 @@ export default function Sidebar({ isOpen }: SidebarProps) {
         isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
-      <Listbox className="pt-2 px-4" variant="flat" aria-label="sidebar">
-        <ListboxItem key="home" className="gap-2 p-3" textValue="首页" href="/admin">
-          <div className="flex items-center gap-2 font-bold">
-            <AiOutlineHome className="h-4 w-4" />
-            <span>首页</span>
-          </div>
-        </ListboxItem>
-        <ListboxItem key="category" className="gap-2 p-3" textValue="分类" href="/admin/category">
-          <div className="flex items-center gap-2">
-            <MdOutlineCategory className="h-4 w-4" />
-            <span>分类</span>
-          </div>
-        </ListboxItem>
-        <ListboxItem key="tag" className="gap-2 p-3" textValue="标签" href="/admin/tag">
-          <div className="flex items-center gap-2">
-            <LuTag className="h-4 w-4" />
-            <span>标签</span>
-          </div>
-        </ListboxItem>
-        <ListboxItem key="image" className="gap-2 p-3" textValue="图片" href="/admin/image">
-          <div className="flex items-center gap-2">
-            <PiImagesLight className="h-4 w-4" />
-            <span>图片</span>
-          </div>
-        </ListboxItem>
-        <ListboxItem key="account" className="gap-2 p-3" textValue="账号" href="/admin/account">
-          <div className="flex items-center gap-2">
-            <FaRegUser className="h-4 w-4" />
-            <span>账号</span>
-          </div>
-        </ListboxItem>
-      </Listbox>
+      <ul className="pt-2 px-4">
+        {menuItems.map(menuItem => (
+          <li className="flex p-3" key={menuItem.href}>
+            <NavLink
+              to={menuItem.href}
+              end
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${isActive ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'}`
+              }
+            >
+              {menuItem.icon}
+              <span>{menuItem.label}</span>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
