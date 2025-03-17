@@ -7,10 +7,15 @@ import { useNavigate } from 'react-router-dom'
 
 type HeaderProps = {
   toggleSidebar: () => void
+  data: {
+    name: string
+    role: string
+  }
 }
 
-export default function Header({ toggleSidebar }: HeaderProps) {
+export default function Header({ toggleSidebar, data }: HeaderProps) {
   const navigate = useNavigate()
+  const { name, role } = data
 
   // 退出登录
   const logout = () => {
@@ -31,7 +36,11 @@ export default function Header({ toggleSidebar }: HeaderProps) {
         </Button>
       </NavbarBrand>
 
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className="gap-2">
+        <NavbarItem className="hidden md:flex font-bold">
+          <span>{name}.</span>
+          <span className="text-primary">{role}</span>
+        </NavbarItem>
         <NavbarItem>
           <ThemeToggle />
         </NavbarItem>

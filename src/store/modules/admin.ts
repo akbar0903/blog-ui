@@ -5,19 +5,8 @@ import { request, setToken as _setToken, getToken } from '@/utils/index.ts'
 // 初始状态
 const initialState: AdminState = {
   token: getToken() || '',
-  adminInfo: {
-    id: 0,
-    username: '',
-    name: '',
-    role: '',
-    avatar: '',
-    email: '',
-    qqNumber: '',
-    address: '',
-    githubUrl: '',
-    bilibiliUrl: '',
-    giteeUrl: '',
-  },
+  adminInfo: null,
+  loginAdminInfo: null,
 }
 
 // 定义slice
@@ -34,12 +23,15 @@ const adminStore = createSlice({
     setAdminInfo: (state, action) => {
       state.adminInfo = action.payload
     },
+    setLoginAdminInfo: (state, action) => {
+      state.loginAdminInfo = action.payload
+    },
   },
 })
 
-export const { setToken, setAdminInfo } = adminStore.actions
+export const { setToken, setAdminInfo, setLoginAdminInfo } = adminStore.actions
 
-// 异步登录actions
+// 异步登录获取token
 export const fetchLogin = (loginForm: LoginForm) => {
   return async (dispatch: Dispatch) => {
     const response: ApiResponse = await request.post('/admin/login', loginForm)
@@ -48,6 +40,20 @@ export const fetchLogin = (loginForm: LoginForm) => {
     }
     if (response.data) {
       dispatch(setToken(response.data))
+    }
+    return response.data
+  }
+}
+
+// 异步获取用户信息
+export const fetchLoginAdminInfo = () => {
+  return async (dispatch: Dispatch) => {
+    const response: ApiResponse = await request.get('/admin/current-admin-info')
+    if (response.code === 0) {
+      throw new Error(response.msg)
+    }
+    if (response.data) {
+      dispatch(setLoginAdminInfo(response.data))
     }
     return response.data
   }

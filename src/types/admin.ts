@@ -14,7 +14,8 @@ export type AdminInfo = {
 
 export type AdminState = {
   token: string
-  adminInfo: AdminInfo
+  adminInfo: AdminInfo | null
+  loginAdminInfo: AdminInfo | null
 }
 
 export type LoginForm = {

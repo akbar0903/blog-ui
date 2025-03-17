@@ -1,2 +1,2 @@
 export * from './request.ts'
-export * from './token.ts'
+export * from './localstorage.ts'

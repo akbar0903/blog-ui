@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from '@/utils/token.ts'
+import { getToken } from '@/utils/localstorage.ts'
 
 // 1.根域名
 const request = axios.create({

@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-import { request } from '@/utils'
 import StatCard from '@/admin/components/StatCard.tsx'
 import { LuBook, LuTag } from 'react-icons/lu'
 import { MdOutlineCategory } from 'react-icons/md'
@@ -33,10 +31,6 @@ const statCards = [
 ]
 
 export default function AdminHome() {
-  useEffect(() => {
-    request.get('/admin/info', { params: { id: 1 } })
-  }, [])
-
   return (
     <>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
