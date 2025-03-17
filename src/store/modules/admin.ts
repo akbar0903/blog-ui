@@ -1,6 +1,6 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit'
 import { AdminState, ApiResponse, LoginForm } from '@/types'
-import { request, setToken as _setToken, getToken } from '@/utils/index.ts'
+import { request, setToken as _setToken, getToken, removeToken } from '@/utils/index.ts'
 
 // 初始状态
 const initialState: AdminState = {
@@ -26,10 +26,18 @@ const adminStore = createSlice({
     setLoginAdminInfo: (state, action) => {
       state.loginAdminInfo = action.payload
     },
+    clearToken: state => {
+      state.token = ''
+      removeToken()
+    },
+    clearLoginAdminInfo: state => {
+      state.loginAdminInfo = null
+    },
   },
 })
 
-export const { setToken, setAdminInfo, setLoginAdminInfo } = adminStore.actions
+export const { setToken, setAdminInfo, setLoginAdminInfo, clearLoginAdminInfo, clearToken } =
+  adminStore.actions
 
 // 异步登录获取token
 export const fetchLogin = (loginForm: LoginForm) => {

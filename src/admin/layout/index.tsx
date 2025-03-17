@@ -16,8 +16,13 @@ export default function Layout() {
   }, [dispatch])
 
   // 管理员名字和角色
-  const loginAdminInfo = useSelector<RootState>(state => state.admin.loginAdminInfo!)
+  const loginAdminInfo = useSelector<RootState>(state => state.admin.loginAdminInfo)
+  // 添加ts忽略信息
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const name = loginAdminInfo?.name
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const role = loginAdminInfo?.role
 
   const toggleSidebar = () => {

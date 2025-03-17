@@ -2,8 +2,9 @@ import ThemeToggle from '@/front/components/ThemeToggle'
 import { addToast, Button, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/react'
 import { HiMenuAlt2 } from 'react-icons/hi'
 import { FiLogOut } from 'react-icons/fi'
-import { removeToken } from '@/utils'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { clearLoginAdminInfo, clearToken } from '@/store/modules/admin.ts'
 
 type HeaderProps = {
   toggleSidebar: () => void
@@ -13,13 +14,15 @@ type HeaderProps = {
   }
 }
 
-export default function Header({ toggleSidebar, data }: HeaderProps) {
+export default function Header(props: HeaderProps) {
+  const { data, toggleSidebar } = props
   const navigate = useNavigate()
-  const { name, role } = data
+  const dispatch = useDispatch()
 
   // 退出登录
   const logout = () => {
-    removeToken()
+    dispatch(clearToken())
+    dispatch(clearLoginAdminInfo())
     navigate('/login')
     addToast({
       title: '期待你再次回来',
@@ -38,8 +41,8 @@ export default function Header({ toggleSidebar, data }: HeaderProps) {
 
       <NavbarContent justify="end" className="gap-2">
         <NavbarItem className="hidden md:flex font-bold">
-          <span>{name}.</span>
-          <span className="text-primary">{role}</span>
+          <span>{data.name}.</span>
+          <span className="text-primary">{data.role}</span>
         </NavbarItem>
         <NavbarItem>
           <ThemeToggle />
