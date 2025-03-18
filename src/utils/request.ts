@@ -8,6 +8,9 @@ import { ERROR_MESSAGES } from '@/message/message.ts'
 const request = axios.create({
   baseURL: '/api',
   timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 // 2.请求拦截器

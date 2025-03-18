@@ -1,12 +1,37 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit'
 import { AdminState, ApiResponse, LoginForm } from '@/types'
 import { request, setToken as _setToken, getToken, removeToken } from '@/utils/index.ts'
+import { AxiosError } from 'axios'
 
 // 初始状态
 const initialState: AdminState = {
   token: getToken() || '',
-  adminInfo: null,
-  loginAdminInfo: null,
+  adminInfo: {
+    id: 0,
+    username: '',
+    name: '',
+    role: '',
+    avatar: '',
+    email: '',
+    qqNumber: '',
+    address: '',
+    githubUrl: '',
+    bilibiliUrl: '',
+    giteeUrl: '',
+  },
+  loginAdminInfo: {
+    id: 0,
+    username: '',
+    name: '',
+    role: '',
+    avatar: '',
+    email: '',
+    qqNumber: '',
+    address: '',
+    githubUrl: '',
+    bilibiliUrl: '',
+    giteeUrl: '',
+  },
 }
 
 // 定义slice
@@ -31,7 +56,9 @@ const adminStore = createSlice({
       removeToken()
     },
     clearLoginAdminInfo: state => {
-      state.loginAdminInfo = null
+      state.loginAdminInfo = {
+        ...state.loginAdminInfo,
+      }
     },
   },
 })
@@ -66,9 +93,10 @@ export const fetchLoginAdminInfo = () => {
       }
       return response.data
     } catch (error) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      throw new Error(error)
+      const axiosError = error as AxiosError
+      if (axiosError) {
+        throw error
+      }
     }
   }
 }

@@ -4,9 +4,11 @@ export const ERROR_MESSAGES = {
   USERNAME_EMPTY: '请输入用户名',
   PASSWORD_EMPTY: '请输入密码',
   PASSWORD_TOO_SHORT: '密码不能小于6个字符',
+  DATA_FETCH_FAILED: '数据获取失败',
 }
 
 export const SUCCESS_MESSAGE = {
   LOGIN_SUCCESS: '登录成功',
+  PLEASE_LOGIN: '请先登录',
   LOGOUT_SUCCESS: 'See you next time, bye bye',
 }

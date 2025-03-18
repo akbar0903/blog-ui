@@ -3,10 +3,13 @@ import { lazy } from 'react'
 import FrontLayout from '@/front/layout'
 import AdminLayout from '@/admin/layout'
 import AuthRoute from '@/admin/components/AuthRoute.tsx'
+import LoginRoute from '@/admin/components/LoginRoute.tsx'
 
+// 前台
 const FrontHome = lazy(() => import('@/front/pages/FrontHome.tsx'))
 const FrontAbout = lazy(() => import('@/front/pages/FrontAbout.tsx'))
 
+// 后台
 const Login = lazy(() => import('@/admin/pages/Login.tsx'))
 const AdminHome = lazy(() => import('@/admin/pages/AdminHome.tsx'))
 const AdminCategory = lazy(() => import('@/admin/pages/AdminCategory.tsx'))
@@ -34,7 +37,11 @@ const router = createBrowserRouter([
   // 后台
   {
     path: '/login',
-    element: <Login />,
+    element: (
+      <LoginRoute>
+        <Login />
+      </LoginRoute>
+    ),
   },
   {
     path: '/admin',

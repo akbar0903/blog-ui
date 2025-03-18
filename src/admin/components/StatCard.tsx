@@ -4,7 +4,7 @@ import { Card, CardBody } from '@heroui/react'
 type StatCardProps = {
   className?: string
   title: string
-  number: number
+  number?: number
   icon: ReactNode
 }
 
