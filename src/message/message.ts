@@ -5,6 +5,7 @@ export const ERROR_MESSAGES = {
   PASSWORD_EMPTY: '请输入密码',
   PASSWORD_TOO_SHORT: '密码不能小于6个字符',
   DATA_FETCH_FAILED: '数据获取失败',
+  UNKNOWN_ERROR: '位置错误',
 }
 
 export const SUCCESS_MESSAGE = {
