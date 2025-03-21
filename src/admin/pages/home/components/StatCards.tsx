@@ -88,7 +88,7 @@ export default function StatCards() {
         }
 
         return (
-          <Card fullWidth>
+          <Card fullWidth key={card.title}>
             <CardBody className="p-4">
               <div className="flex items-center">
                 <div className={`p-3 rounded-full ${card.bgColor} text-white`}>{card.icon}</div>

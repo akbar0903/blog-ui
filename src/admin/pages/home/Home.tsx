@@ -1,4 +1,5 @@
 import StatCards from '@/admin/pages/home/components/StatCards.tsx'
+import FeatureCardList from './components/FeatureCardList'
 
 export default function Home() {
   return (
@@ -6,7 +7,8 @@ export default function Home() {
       {/*头部统计信息卡片*/}
       <StatCards />
 
-      {/* 文章列表 */}
+      {/* 功能列表 */}
+      <FeatureCardList />
     </>
   )
 }
