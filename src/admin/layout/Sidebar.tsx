@@ -4,6 +4,7 @@ import { LuTag } from 'react-icons/lu'
 import { PiImagesLight } from 'react-icons/pi'
 import { FaRegUser } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import { BsBook } from 'react-icons/bs'
 
 type SidebarProps = {
   isOpen: boolean
@@ -14,6 +15,11 @@ const menuItems = [
     label: '首页',
     href: '/admin',
     icon: <AiOutlineHome className="h-4 w-4" />,
+  },
+  {
+    label: '文章',
+    href: '/admin/article',
+    icon: <BsBook className="h-4 w-4" />,
   },
   {
     label: '分类',
@@ -45,7 +51,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
       }`}
     >
       <ul className="pt-2 px-4">
-        {menuItems.map(menuItem => (
+        {menuItems.map((menuItem) => (
           <li className="flex p-3" key={menuItem.href}>
             <NavLink
               to={menuItem.href}

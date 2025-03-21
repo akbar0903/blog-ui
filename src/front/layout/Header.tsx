@@ -77,7 +77,7 @@ export default function Header() {
 
       {/* 小屏幕下菜单栏 */}
       <NavbarMenu>
-        {menuItems.map(item => (
+        {menuItems.map((item) => (
           <NavbarMenuItem key={item.routerName}>
             <Link to={item.routerName} onClick={() => setIsMenuOpen(false)} className="font-bold">
               {item.name}

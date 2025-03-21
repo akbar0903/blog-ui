@@ -20,7 +20,7 @@ export default function RecentArticlesCard({ articles }: RecentArticlesCardProps
         <h2 className="text-xl font-semibold mb-4">Recent Articles</h2>
       </CardHeader>
       <CardBody className="px-6 pb-6 pt-0 space-y-3">
-        {articles.slice(0, 3).map(article => (
+        {articles.slice(0, 3).map((article) => (
           <Link
             key={article.id}
             href={`/articles/${article.id}`}

@@ -51,11 +51,11 @@ const adminStore = createSlice({
     setLoginAdminInfo: (state, action) => {
       state.loginAdminInfo = action.payload
     },
-    clearToken: state => {
+    clearToken: (state) => {
       state.token = ''
       removeToken()
     },
-    clearLoginAdminInfo: state => {
+    clearLoginAdminInfo: (state) => {
       state.loginAdminInfo = {
         ...state.loginAdminInfo,
       }
