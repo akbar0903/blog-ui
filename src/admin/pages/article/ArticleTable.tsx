@@ -17,7 +17,7 @@ import { FaRegEdit, FaTrash } from 'react-icons/fa'
 
 // 表格列
 const columns = [
-  { name: '标题', id: 'title' },
+  { label: '标题', id: 'title' },
   { name: '封面', id: 'coverImage' },
   { name: '状态', id: 'state' },
   { name: '分类', id: 'categoryName' },

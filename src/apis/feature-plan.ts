@@ -1,14 +1,14 @@
-import { ApiResponse, FeaturePlan, FeaturePlanParams } from '@/types'
+import { FeaturePlan, FeaturePlanParams } from '@/types'
 import { request } from '@/utils'
 
-export const getFeaturePlanListAPI = (): Promise<ApiResponse<FeaturePlan[]>> => {
+export const getFeaturePlanListAPI = (): Promise<FeaturePlan[]> => {
   return request({
     url: '/feature-plan/list',
     method: 'GET',
   })
 }
 
-export const addFeaturePlanAPI = (data: FeaturePlanParams): Promise<ApiResponse<null>> => {
+export const addFeaturePlanAPI = (data: FeaturePlanParams): Promise<null> => {
   return request({
     url: '/feature-plan',
     method: 'POST',
@@ -18,7 +18,7 @@ export const addFeaturePlanAPI = (data: FeaturePlanParams): Promise<ApiResponse<
   })
 }
 
-export const deleteFeaturePlanAPI = (id: number): Promise<ApiResponse<null>> => {
+export const deleteFeaturePlanAPI = (id: number): Promise<null> => {
   return request({
     url: `/feature-plan/${id}`,
     method: 'DELETE',

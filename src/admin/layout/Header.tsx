@@ -5,7 +5,6 @@ import { FiLogOut } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { clearLoginAdminInfo, clearToken } from '@/store/modules/admin.ts'
-import { SUCCESS_MESSAGE } from '@/message/message.ts'
 
 type HeaderProps = {
   toggleSidebar: () => void
@@ -26,8 +25,9 @@ export default function Header(props: HeaderProps) {
     dispatch(clearLoginAdminInfo())
     navigate('/login')
     addToast({
-      title: SUCCESS_MESSAGE.LOGOUT_SUCCESS,
+      title: 'See you next time, bye bye',
       color: 'success',
+      timeout: 3000,
     })
   }
 

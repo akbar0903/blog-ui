@@ -1,10 +1,10 @@
 import { request } from '@/utils'
-import { ApiResponse, StatisticsData } from '@/types'
+import { StatisticsData } from '@/types'
 
 /**
  * 获取首页卡片数据
  */
-export const statisticsAPI = (): Promise<ApiResponse<StatisticsData>> => {
+export const statisticsAPI = (): Promise<StatisticsData> => {
   return request({
     url: '/statistics',
     method: 'GET',

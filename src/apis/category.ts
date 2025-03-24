@@ -1,7 +1,7 @@
-import { ApiResponse, Category } from '@/types'
+import { Category } from '@/types'
 import { request } from '@/utils'
 
-export const getCategoryListAPI = (): Promise<ApiResponse<Category[]>> => {
+export const getCategoryListAPI = (): Promise<Category[]> => {
   return request({
     url: '/category/list',
     method: 'GET',

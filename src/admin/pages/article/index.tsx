@@ -1,10 +1,9 @@
 import { Button, Card, CardBody } from '@heroui/react'
 import { ArticleData, ArticlePageParams } from '@/types'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getArticleListAPI } from '@/apis/article.ts'
-import { ERROR_MESSAGES } from '@/message/message.ts'
-import ArticleTable from '@/admin/pages/article/components/ArticleTable.tsx'
-import ArticleSearchBar from '@/admin/pages/article/components/ArticleSearchBar.tsx'
+import ArticleTable from '@/admin/pages/article/ArticleTable'
+import ArticleSearchBar from '@/admin/pages/article/ArticleSearchBar'
 import CustomPagination from '@/admin/components/CustomPagination.tsx'
 
 export default function Article() {
@@ -21,34 +20,29 @@ export default function Article() {
   })
 
   // 获取文章信息
-  const fetchArticleData = useCallback(async () => {
-    try {
-      const response = await getArticleListAPI(articlePageParams)
-      if (response.code === 1) {
-        setArticles(response.data.rows)
-        setTotal(response.data.total)
-      } else {
-        throw new Error(response.msg || ERROR_MESSAGES.DATA_FETCH_FAILED)
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message)
-      } else {
-        console.log(ERROR_MESSAGES.UNKNOWN_ERROR)
+  useEffect(() => {
+    const fetchArticleData = async () => {
+      try {
+        const data = await getArticleListAPI(articlePageParams)
+        setArticles(data.rows)
+        setTotal(data.total)
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message)
+        } else {
+          console.error('未知错误')
+        }
       }
     }
-  }, [articlePageParams])
-
-  useEffect(() => {
     fetchArticleData()
-  }, [fetchArticleData])
+  }, [articlePageParams])
 
   // 处理文章分页
   const handlePageChange = (pageNum: number) => {
-    setArticlePageParams({
-      ...articlePageParams,
-      pageNum: pageNum,
-    })
+    setArticlePageParams((prev) => ({
+      ...prev,
+      pageNum,
+    }))
   }
 
   return (
@@ -60,7 +54,7 @@ export default function Article() {
             articlePageParams={articlePageParams}
             onArticleFilterChange={setArticlePageParams}
           />
-          <Button>添加文章</Button>
+          <Button color="primary">添加文章</Button>
         </div>
 
         {/*文章列表*/}

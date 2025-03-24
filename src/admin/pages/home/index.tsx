@@ -1,5 +1,5 @@
-import StatCards from '@/admin/pages/home/components/StatCards.tsx'
-import FeatureCardList from './components/FeatureCardList'
+import StatCards from '@/admin/pages/home/StatCards'
+import FeatureCardList from './FeatureCardList'
 
 export default function Home() {
   return (

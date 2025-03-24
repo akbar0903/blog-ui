@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getToken, removeToken } from '@/utils/localstorage.ts'
 import router from '@/router'
 
-// 1.根域名
+// 1.根域名，超时时间配置
 const request = axios.create({
   baseURL: '/api',
   timeout: 10000,
@@ -29,7 +29,12 @@ request.interceptors.request.use(
 // 3.响应拦截器
 request.interceptors.response.use(
   (response) => {
-    return response.data
+    const { code, msg, data } = response.data
+    if (code === 1) {
+      return data
+    } else {
+      return Promise.reject(new Error(msg || '数据获取失败'))
+    }
   },
 
   (err) => {
@@ -38,7 +43,7 @@ request.interceptors.response.use(
       removeToken()
       router.navigate('/login')
     }
-    return Promise.reject(err)
+    return Promise.reject(new Error(err.response?.data?.msg || '服务器错误'))
   }
 )
 

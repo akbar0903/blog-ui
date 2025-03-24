@@ -25,8 +25,3 @@ export type LoginForm = {
   username: string
   password: string
 }
-
-export type LoginFormErrors = {
-  username?: string
-  password?: string
-}

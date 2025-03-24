@@ -1,9 +1,8 @@
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from '@heroui/react'
 import { FiSearch } from 'react-icons/fi'
-import { Key, KeyboardEvent, useCallback, useEffect, useState } from 'react'
+import { KeyboardEvent, useEffect, useState } from 'react'
 import { ArticlePageParams, Category } from '@/types'
 import { getCategoryListAPI } from '@/apis/category'
-import { ERROR_MESSAGES } from '@/message/message'
 import { GoChevronDown } from 'react-icons/go'
 
 const states = [
@@ -20,52 +19,45 @@ export default function ArticleSearchBar({
   articlePageParams,
   onArticleFilterChange,
 }: ArticleSearchBarProps) {
-  const [filterTitle, setFilterTitle] = useState('')
+  const [titleFilter, setTitleFilter] = useState('')
   const [stateFilter, setStateFilter] = useState<number | undefined>(undefined)
   const [categoryFilter, setCategoryFilter] = useState<number | undefined>(undefined)
   const [categories, setCategories] = useState<Category[]>([])
 
   // 获取分类列表
-  const fetchCategoryData = useCallback(async () => {
-    try {
-      const response = await getCategoryListAPI()
-      if (response.code === 1) {
-        setCategories(response.data)
-      } else {
-        throw new Error(response.msg || ERROR_MESSAGES.DATA_FETCH_FAILED)
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message)
-      } else {
-        console.log(ERROR_MESSAGES.UNKNOWN_ERROR)
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const data = await getCategoryListAPI()
+        setCategories(data)
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message)
+        } else {
+          console.error('未知错误')
+        }
       }
     }
-  }, [])
-
-  useEffect(() => {
     fetchCategoryData()
-  }, [fetchCategoryData])
+  }, [])
 
   // 点击input里面的按钮进行搜索
   const handleInputClick = () => {
-    if (!filterTitle) {
+    if (!titleFilter) {
       return
     }
-
     onArticleFilterChange({
       ...articlePageParams,
-      title: filterTitle,
+      title: titleFilter,
     })
   }
 
   // 按下enter键进行搜索
   const handleInputKeyUp = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleInputClick()
-    } else {
+    if (e.key !== 'Enter') {
       return
     }
+    handleInputClick()
   }
 
   // 清空搜索框
@@ -74,17 +66,7 @@ export default function ArticleSearchBar({
       ...articlePageParams,
       title: '',
     })
-    setFilterTitle('')
-  }
-
-  // 根据文章state搜索
-  const handleStateFilterChange = (key: Key) => {
-    setStateFilter((prevState) => (prevState === key ? undefined : (key as number)))
-  }
-
-  // 根据文章category进行搜搜
-  const handleCategoryFilterChange = (key: Key) => {
-    setCategoryFilter((prevState) => (prevState === key ? undefined : (key as number)))
+    setTitleFilter('')
   }
 
   useEffect(() => {
@@ -101,9 +83,9 @@ export default function ArticleSearchBar({
         <Input
           isClearable
           placeholder="请输入文章标题进行查询"
-          value={filterTitle}
+          value={titleFilter}
           name="title"
-          onChange={(e) => setFilterTitle(e.target.value)}
+          onChange={(e) => setTitleFilter(e.target.value)}
           onKeyUp={handleInputKeyUp}
           onClear={handleInputClear}
           startContent={
@@ -124,7 +106,9 @@ export default function ArticleSearchBar({
           selectedKeys={stateFilter ? [stateFilter] : []}
           selectionMode="single"
           aria-label="Article State Menu"
-          onAction={handleStateFilterChange}
+          onAction={(key) => {
+            setStateFilter(key as number)
+          }}
         >
           {states.map((state) => (
             <DropdownItem key={state.id}>{state.name}</DropdownItem>
@@ -141,7 +125,9 @@ export default function ArticleSearchBar({
         <DropdownMenu
           selectionMode="single"
           selectedKeys={categoryFilter ? [categoryFilter] : []}
-          onAction={handleCategoryFilterChange}
+          onAction={(key) => {
+            setCategoryFilter(key as number)
+          }}
           aria-label="Category List Menu"
         >
           {categories.map((category) => (
@@ -149,6 +135,20 @@ export default function ArticleSearchBar({
           ))}
         </DropdownMenu>
       </Dropdown>
+      <Button
+        color="primary"
+        variant="flat"
+        onPress={() => {
+          if (stateFilter === undefined && categoryFilter === undefined && !titleFilter) {
+            return
+          }
+          setStateFilter(undefined)
+          setCategoryFilter(undefined)
+          handleInputClear()
+        }}
+      >
+        重置
+      </Button>
     </div>
   )
 }

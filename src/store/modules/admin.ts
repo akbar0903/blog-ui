@@ -1,7 +1,7 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit'
-import { AdminState, ApiResponse, LoginForm } from '@/types'
-import { request, setToken as _setToken, getToken, removeToken } from '@/utils/index.ts'
-import { AxiosError } from 'axios'
+import { AdminState, LoginForm } from '@/types'
+import { setToken as _setToken, getToken, removeToken } from '@/utils/index.ts'
+import { loginAPI, loginInfoAPI } from '@/apis/admin'
 
 // 初始状态
 const initialState: AdminState = {
@@ -69,14 +69,9 @@ export const { setToken, setAdminInfo, setLoginAdminInfo, clearLoginAdminInfo, c
 // 异步登录获取token
 export const fetchLogin = (loginForm: LoginForm) => {
   return async (dispatch: Dispatch) => {
-    const response: ApiResponse = await request.post('/admin/login', loginForm)
-    if (response.code === 0) {
-      throw new Error(response.msg)
-    }
-    if (response.data) {
-      dispatch(setToken(response.data))
-    }
-    return response.data
+    const data = await loginAPI(loginForm)
+    dispatch(setToken(data))
+    return data
   }
 }
 
@@ -84,17 +79,11 @@ export const fetchLogin = (loginForm: LoginForm) => {
 export const fetchLoginAdminInfo = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const response: ApiResponse = await request.get('/admin/current-admin-info')
-      if (response.code === 0) {
-        throw new Error(response.msg)
-      }
-      if (response.data) {
-        dispatch(setLoginAdminInfo(response.data))
-      }
-      return response.data
+      const data = await loginInfoAPI()
+      dispatch(setLoginAdminInfo(data))
+      return data
     } catch (error) {
-      const axiosError = error as AxiosError
-      if (axiosError) {
+      if (error instanceof Error) {
         throw error
       }
     }

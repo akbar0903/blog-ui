@@ -10,9 +10,9 @@ const FrontHome = lazy(() => import('@/front/pages/FrontHome.tsx'))
 const FrontAbout = lazy(() => import('@/front/pages/FrontAbout.tsx'))
 
 // 后台
-const Login = lazy(() => import('@/admin/pages/Login.tsx'))
-const AdminHome = lazy(() => import('@/admin/pages/home/Home.tsx'))
-const Article = lazy(() => import('@/admin/pages/article/Article.tsx'))
+const Login = lazy(() => import('@/admin/pages/login'))
+const AdminHome = lazy(() => import('@/admin/pages/home'))
+const Article = lazy(() => import('@/admin/pages/article'))
 const AdminCategory = lazy(() => import('@/admin/pages/AdminCategory.tsx'))
 const AdminTag = lazy(() => import('@/admin/pages/AdminTag.tsx'))
 const AdminImage = lazy(() => import('@/admin/pages/AdminImage.tsx'))
