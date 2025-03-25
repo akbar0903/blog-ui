@@ -1,13 +1,12 @@
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from '@heroui/react'
+import { Button, Input, Select, SelectItem } from '@heroui/react'
 import { FiSearch } from 'react-icons/fi'
 import { KeyboardEvent, useEffect, useState } from 'react'
 import { ArticlePageParams, Category } from '@/types'
 import { getCategoryListAPI } from '@/apis/category'
-import { GoChevronDown } from 'react-icons/go'
 
 const states = [
-  { name: '发布', id: 1 },
-  { name: '草稿', id: 0 },
+  { label: '发布', key: 1 },
+  { label: '草稿', key: 0 },
 ]
 
 interface ArticleSearchBarProps {
@@ -20,8 +19,8 @@ export default function ArticleSearchBar({
   onArticleFilterChange,
 }: ArticleSearchBarProps) {
   const [titleFilter, setTitleFilter] = useState('')
-  const [stateFilter, setStateFilter] = useState<number | undefined>(undefined)
-  const [categoryFilter, setCategoryFilter] = useState<number | undefined>(undefined)
+  const [stateFilter, setStateFilter] = useState<number | null>(null)
+  const [categoryFilter, setCategoryFilter] = useState<number | null>(null)
   const [categories, setCategories] = useState<Category[]>([])
 
   // 获取分类列表
@@ -72,8 +71,8 @@ export default function ArticleSearchBar({
   useEffect(() => {
     onArticleFilterChange({
       ...articlePageParams,
-      state: stateFilter,
-      categoryId: categoryFilter,
+      state: stateFilter!,
+      categoryId: categoryFilter!,
     })
   }, [stateFilter, categoryFilter])
 
@@ -96,54 +95,43 @@ export default function ArticleSearchBar({
         />
       </div>
 
-      <Dropdown>
-        <DropdownTrigger>
-          <Button endContent={<GoChevronDown className="text-small" />} variant="flat">
-            状态
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu
-          selectedKeys={stateFilter ? [stateFilter] : []}
-          selectionMode="single"
-          aria-label="Article State Menu"
-          onAction={(key) => {
-            setStateFilter(key as number)
-          }}
-        >
-          {states.map((state) => (
-            <DropdownItem key={state.id}>{state.name}</DropdownItem>
-          ))}
-        </DropdownMenu>
-      </Dropdown>
+      <Select
+        aria-label="select article state"
+        className="w-36"
+        placeholder="选择发布状态"
+        selectedKeys={stateFilter !== null ? [String(stateFilter)] : []}
+        onChange={(e) => {
+          setStateFilter(parseInt(e.target.value, 10))
+        }}
+      >
+        {states.map((state) => (
+          <SelectItem key={String(state.key)}>{state.label}</SelectItem>
+        ))}
+      </Select>
 
-      <Dropdown>
-        <DropdownTrigger>
-          <Button endContent={<GoChevronDown className="text-small" />} variant="flat">
-            分类
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu
-          selectionMode="single"
-          selectedKeys={categoryFilter ? [categoryFilter] : []}
-          onAction={(key) => {
-            setCategoryFilter(key as number)
-          }}
-          aria-label="Category List Menu"
-        >
-          {categories.map((category) => (
-            <DropdownItem key={category.id}>{category.name}</DropdownItem>
-          ))}
-        </DropdownMenu>
-      </Dropdown>
+      <Select
+        aria-label="select article category"
+        className="w-40"
+        placeholder="选择文章分类"
+        selectedKeys={categoryFilter !== null ? [String(categoryFilter)] : []}
+        onChange={(e) => {
+          setCategoryFilter(parseInt(e.target.value, 10))
+        }}
+      >
+        {categories.map((category) => (
+          <SelectItem key={String(category.id)}>{category.name}</SelectItem>
+        ))}
+      </Select>
+
       <Button
         color="primary"
         variant="flat"
         onPress={() => {
-          if (stateFilter === undefined && categoryFilter === undefined && !titleFilter) {
+          if (stateFilter === null && categoryFilter === null && !titleFilter) {
             return
           }
-          setStateFilter(undefined)
-          setCategoryFilter(undefined)
+          setStateFilter(null)
+          setCategoryFilter(null)
           handleInputClear()
         }}
       >

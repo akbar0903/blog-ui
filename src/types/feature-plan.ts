@@ -1,14 +1,14 @@
-export interface FeaturePlan {
+export interface ToDo {
   id: number
   title: string
-  description: string
+  type: string
   isCompleted: number
   completedTime: string
   createdTime: string
   updatedTime: string
 }
 
-export interface FeaturePlanParams {
+export interface ToDoParams {
   title: string
-  description: string
+  type: string
 }
