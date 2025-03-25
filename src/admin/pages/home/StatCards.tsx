@@ -3,7 +3,6 @@ import { LuBook, LuTag } from 'react-icons/lu'
 import { MdOutlineCategory } from 'react-icons/md'
 import { GoFileDirectory } from 'react-icons/go'
 import { statisticsAPI } from '@/apis/statistics.ts'
-import { ERROR_MESSAGES } from '@/message/message.ts'
 import { Card, CardBody } from '@heroui/react'
 
 const statCardsProperty = [
@@ -44,19 +43,13 @@ export default function StatCards() {
   // 获取卡片数据
   const fetchCardData = async () => {
     try {
-      const response = await statisticsAPI()
-      if (response.code === 1) {
-        setCardNumbers({
-          ...response.data,
-        })
-      } else {
-        throw new Error(response.msg || ERROR_MESSAGES.DATA_FETCH_FAILED)
-      }
+      const data = await statisticsAPI()
+      setCardNumbers(data)
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message)
+        console.error(error.message)
       } else {
-        console.log(ERROR_MESSAGES.UNKNOWN_ERROR)
+        console.log('未知错误')
       }
     }
   }
