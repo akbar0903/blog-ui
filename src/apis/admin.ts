@@ -1,7 +1,7 @@
 import { request } from '@/utils'
-import { LoginForm } from '@/types'
+import { AdminInfo, LoginForm, UpdataAdmin } from '@/types'
 
-export const loginAPI = (data: LoginForm) => {
+export const loginAPI = (data: LoginForm): Promise<string> => {
   return request({
     url: 'admin/login',
     method: 'POST',
@@ -9,9 +9,17 @@ export const loginAPI = (data: LoginForm) => {
   })
 }
 
-export const loginInfoAPI = () => {
+export const getLoginInfoAPI = (): Promise<AdminInfo> => {
   return request({
     url: '/admin/current-admin-info',
     method: 'GET',
+  })
+}
+
+export const updateAdminInfoAPI = (data: UpdataAdmin): Promise<null> => {
+  return request({
+    url: '/admin',
+    method: 'PUT',
+    data: data,
   })
 }

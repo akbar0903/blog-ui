@@ -25,3 +25,15 @@ export type LoginForm = {
   username: string
   password: string
 }
+
+export interface UpdataAdmin {
+  id: number
+  name: string
+  avatar: string
+  email: string
+  qqNumber: string
+  address: string
+  githubUrl: string
+  bilibiliUrl: string
+  giteeUrl: string
+}

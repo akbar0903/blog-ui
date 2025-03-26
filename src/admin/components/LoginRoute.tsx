@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { getToken } from '@/utils' // 假设 getToken 获取 token，request 是你的请求工具
 import { ReactNode } from 'react'
-import { loginInfoAPI } from '@/apis/admin.ts'
+import { getLoginInfoAPI } from '@/apis/admin.ts'
 import { AxiosError } from 'axios'
 import { Spinner } from '@heroui/react'
 
@@ -26,7 +26,7 @@ export default function LoginRoute({ children }: LoginRouteProps) {
       }
       try {
         // 异步请求后端验证 token
-        await loginInfoAPI()
+        await getLoginInfoAPI()
         setIsValid(true) // token 有效，重定向到 /admin
       } catch (error) {
         const axiosError = error as AxiosError

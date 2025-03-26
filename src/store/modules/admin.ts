@@ -1,7 +1,7 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit'
 import { AdminState, LoginForm } from '@/types'
 import { setToken as _setToken, getToken, removeToken } from '@/utils/index.ts'
-import { loginAPI, loginInfoAPI } from '@/apis/admin'
+import { loginAPI, getLoginInfoAPI } from '@/apis/admin'
 
 // 初始状态
 const initialState: AdminState = {
@@ -79,7 +79,7 @@ export const fetchLogin = (loginForm: LoginForm) => {
 export const fetchLoginAdminInfo = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const data = await loginInfoAPI()
+      const data = await getLoginInfoAPI()
       dispatch(setLoginAdminInfo(data))
       return data
     } catch (error) {
