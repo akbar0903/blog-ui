@@ -15,7 +15,7 @@ const AdminHome = lazy(() => import('@/admin/pages/home'))
 const Article = lazy(() => import('@/admin/pages/article'))
 const AdminCategory = lazy(() => import('@/admin/pages/category'))
 const AdminTag = lazy(() => import('@/admin/pages/tag'))
-const AdminImage = lazy(() => import('@/admin/pages/AdminImage.tsx'))
+const AdminImage = lazy(() => import('@/admin/pages/image'))
 const AdminAccount = lazy(() => import('@/admin/pages/AdminAccount.tsx'))
 
 const router = createBrowserRouter([

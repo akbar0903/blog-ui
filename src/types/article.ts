@@ -21,8 +21,3 @@ export type ArticlePageParams = {
   state?: number
   title?: string
 }
-
-export type PageResult = {
-  rows: ArticleData[]
-  total: number
-}

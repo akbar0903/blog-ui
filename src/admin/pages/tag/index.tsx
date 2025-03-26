@@ -1,6 +1,7 @@
 import TagCard from '@/admin/components/CategoryTagCard'
 import { addTagAPI, deleteTagAPI, getTagInfoAPI, getTagListAPI, updateTagAPI } from '@/apis/tag'
 import { TagData } from '@/types'
+import { handleAPIRequest } from '@/utils'
 import {
   addToast,
   Button,
@@ -26,7 +27,7 @@ const TAG_COLORS = [
   'bg-orange-100 text-orange-800 border border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800/50',
 ]
 
-export default function Tag() {
+export default function TagList() {
   const [tags, setTags] = useState<TagData[]>([])
   const [editTag, setEditTag] = useState<Partial<TagData>>({})
 
@@ -109,17 +110,7 @@ export default function Tag() {
 
   // 删除标签
   const handleDelete = async (id: number) => {
-    try {
-      await deleteTagAPI(id)
-      addToast({ title: '删除成功', color: 'success', timeout: 3000 })
-      fetchTagData()
-    } catch (error) {
-      addToast({
-        title: error instanceof Error ? error.message : '删除失败',
-        color: 'danger',
-        timeout: 3000,
-      })
-    }
+    handleAPIRequest(() => deleteTagAPI(id), '删除成功', fetchTagData)
   }
 
   return (

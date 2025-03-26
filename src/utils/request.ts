@@ -6,9 +6,6 @@ import router from '@/router'
 const request = axios.create({
   baseURL: '/api',
   timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 })
 
 // 2.请求拦截器

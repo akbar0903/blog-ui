@@ -19,8 +19,9 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@heroui/react'
+import { handleAPIRequest } from '@/utils'
 
-export default function Category() {
+export default function CategoryList() {
   const [categories, setCategories] = useState<CategoryData[]>([])
   // 当 editCategory 为 undefined 时，可以理解为未设置状态
   // 当 editCategory 不为 undefined 时，如果存在 id 则表示是更新，否则表示添加
@@ -105,17 +106,7 @@ export default function Category() {
 
   // 删除分类
   const handleDelete = async (id: number) => {
-    try {
-      await deleteCategoryAPI(id)
-      addToast({ title: '删除成功', color: 'success', timeout: 3000 })
-      fetchCategories()
-    } catch (error) {
-      addToast({
-        title: error instanceof Error ? error.message : '删除失败',
-        color: 'danger',
-        timeout: 3000,
-      })
-    }
+    handleAPIRequest(() => deleteCategoryAPI(id), '删除成功', fetchCategories)
   }
 
   return (

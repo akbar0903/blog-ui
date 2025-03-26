@@ -6,7 +6,7 @@ import ArticleTable from '@/admin/pages/article/ArticleTable'
 import ArticleSearchBar from '@/admin/pages/article/ArticleSearchBar'
 import CustomPagination from '@/admin/components/CustomPagination.tsx'
 
-export default function Article() {
+export default function ArticleList() {
   const [articles, setArticles] = useState<ArticleData[]>([])
   const [total, setTotal] = useState(0)
 
