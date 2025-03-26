@@ -1,7 +1,7 @@
 import { Button, Input, Select, SelectItem } from '@heroui/react'
 import { FiSearch } from 'react-icons/fi'
 import { KeyboardEvent, useEffect, useState } from 'react'
-import { ArticlePageParams, Category } from '@/types'
+import { ArticlePageParams, CategoryData } from '@/types'
 import { getCategoryListAPI } from '@/apis/category'
 
 const states = [
@@ -21,7 +21,7 @@ export default function ArticleSearchBar({
   const [titleFilter, setTitleFilter] = useState('')
   const [stateFilter, setStateFilter] = useState<number | null>(null)
   const [categoryFilter, setCategoryFilter] = useState<number | null>(null)
-  const [categories, setCategories] = useState<Category[]>([])
+  const [categories, setCategories] = useState<CategoryData[]>([])
 
   // 获取分类列表
   useEffect(() => {

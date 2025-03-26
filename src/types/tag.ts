@@ -1,7 +1,4 @@
-/**
- * 文章分类类型
- */
-export type CategoryData = {
+export interface TagData {
   id: number
   name: string
   adminId: number

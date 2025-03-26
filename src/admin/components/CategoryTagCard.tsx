@@ -1,4 +1,4 @@
-import { Category } from '@/types'
+import { CategoryData, TagData } from '@/types'
 import {
   Button,
   Card,
@@ -9,24 +9,30 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@heroui/react'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 import { GoClock } from 'react-icons/go'
 
-interface CategoryCardProps {
-  category: Category
+interface CategoryTagCardProps {
+  data: CategoryData | TagData
   onEdit: (id: number) => void
   onDelete: (id: number) => void
+  className?: string
+  isHaveDivider?: boolean
+  cardIcon?: ReactNode
 }
 
-export default function CategoryCard({ category, onEdit, onDelete }: CategoryCardProps) {
+export default function CategoryTagCard(props: CategoryTagCardProps) {
+  const { data, onEdit, onDelete, className, isHaveDivider = true, cardIcon } = props
+
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+
   return (
-    <Card className="py-2 relative group">
+    <Card className={`py-2 relative group ${className}`}>
       <CardHeader className="px-6 flex justify-between">
-        <h2 className="text-xl">
-          <span className="text-primary-500 font-bold pr-1">#</span>
-          {category.name}
+        <h2 className="text-xl flex items-center gap-2">
+          {cardIcon}
+          {data.name}
         </h2>
         <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-2">
           {/* 修改 */}
@@ -35,7 +41,7 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
             isIconOnly
             variant="flat"
             size="sm"
-            onPress={() => onEdit(category.id)}
+            onPress={() => onEdit(data.id)}
           >
             <FaRegEdit className="h-4 w-4" />
           </Button>
@@ -51,7 +57,7 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
               <div className="px-1 py-2">
                 <h1 className="pb-2">请确认此操作！</h1>
                 <div className="flex gap-2">
-                  <Button size="sm" color="primary" onPress={() => onDelete(category.id)}>
+                  <Button size="sm" color="primary" onPress={() => onDelete(data.id)}>
                     确定
                   </Button>
                   <Button
@@ -68,15 +74,15 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
           </Popover>
         </div>
       </CardHeader>
-      <Divider />
+      {isHaveDivider && <Divider />}
       <CardBody className="px-6 gap-3">
         <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <GoClock className="h-4 w-4" />
-          <span>创建于: {category.createdTime}</span>
+          <span>创建于: {data.createdTime}</span>
         </div>
         <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <GoClock className="h-4 w-4" />
-          <span>创建于: {category.updatedTime}</span>
+          <span>创建于: {data.updatedTime}</span>
         </div>
       </CardBody>
     </Card>

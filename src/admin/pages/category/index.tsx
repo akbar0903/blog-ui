@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import CategoryCard from './CategoryCard'
-import { Category } from '@/types'
+import CategoryCard from '../../components/CategoryTagCard'
+import { CategoryData } from '@/types'
 import {
   addCategoryAPI,
   deleteCategoryAPI,
@@ -20,11 +20,11 @@ import {
   useDisclosure,
 } from '@heroui/react'
 
-export default function AdminCategory() {
-  const [categories, setCategories] = useState<Category[]>([])
+export default function Category() {
+  const [categories, setCategories] = useState<CategoryData[]>([])
   // 当 editCategory 为 undefined 时，可以理解为未设置状态
   // 当 editCategory 不为 undefined 时，如果存在 id 则表示是更新，否则表示添加
-  const [editCategory, setEditCategory] = useState<Partial<Category>>({})
+  const [editCategory, setEditCategory] = useState<Partial<CategoryData>>({})
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
@@ -64,6 +64,23 @@ export default function AdminCategory() {
 
   // 提交逻辑，根据 editCategory 是否含 id 来判断是添加还是更新
   const handleSubmit = async () => {
+    if (!editCategory.name?.trim()) {
+      addToast({
+        title: '请填写分类名称',
+        color: 'warning',
+        timeout: 3000,
+      })
+      return
+    }
+    if (editCategory.name.length > 20) {
+      addToast({
+        title: '标签名称不能超过20个字符',
+        color: 'warning',
+        timeout: 3000,
+      })
+      return
+    }
+
     try {
       if (editCategory.id) {
         // 更新操作
@@ -112,10 +129,11 @@ export default function AdminCategory() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {categories.map((category) => (
           <CategoryCard
-            category={category}
+            data={category}
             key={category.id}
             onEdit={openEditModel}
             onDelete={handleDelete}
+            cardIcon={<span className="text-primary-500 font-bold">#</span>}
           />
         ))}
       </div>
