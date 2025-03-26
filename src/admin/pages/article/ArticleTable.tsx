@@ -13,7 +13,7 @@ import {
 } from '@heroui/react'
 import { Key, useCallback } from 'react'
 import { BsBook } from 'react-icons/bs'
-import { FaRegEdit, FaTrash } from 'react-icons/fa'
+import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 
 // 表格列
 const columns = [
@@ -84,7 +84,7 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
             </Tooltip>
             <Tooltip color="danger" content="删除">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <FaTrash />
+                <FaRegTrashAlt />
               </span>
             </Tooltip>
           </div>
