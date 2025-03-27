@@ -1,6 +1,6 @@
 import TagCard from '@/admin/components/CategoryTagCard'
 import { addTagAPI, deleteTagAPI, getTagInfoAPI, getTagListAPI, updateTagAPI } from '@/apis/tag'
-import { TagData } from '@/types'
+import { TagType } from '@/types'
 import { handleAPIRequest } from '@/utils'
 import {
   addToast,
@@ -28,8 +28,8 @@ const TAG_COLORS = [
 ]
 
 export default function TagList() {
-  const [tags, setTags] = useState<TagData[]>([])
-  const [editTag, setEditTag] = useState<Partial<TagData>>({})
+  const [tags, setTags] = useState<TagType[]>([])
+  const [editTag, setEditTag] = useState<Partial<TagType>>({})
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 

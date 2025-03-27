@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import CategoryCard from '../../components/CategoryTagCard'
-import { CategoryData } from '@/types'
+import { CategoryType } from '@/types'
 import {
   addCategoryAPI,
   deleteCategoryAPI,
@@ -22,10 +22,10 @@ import {
 import { handleAPIRequest } from '@/utils'
 
 export default function CategoryList() {
-  const [categories, setCategories] = useState<CategoryData[]>([])
+  const [categories, setCategories] = useState<CategoryType[]>([])
   // 当 editCategory 为 undefined 时，可以理解为未设置状态
   // 当 editCategory 不为 undefined 时，如果存在 id 则表示是更新，否则表示添加
-  const [editCategory, setEditCategory] = useState<Partial<CategoryData>>({})
+  const [editCategory, setEditCategory] = useState<Partial<CategoryType>>({})
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 

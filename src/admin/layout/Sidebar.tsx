@@ -18,7 +18,7 @@ const menuItems = [
   },
   {
     label: '文章',
-    href: '/admin/article',
+    href: '/admin/article-list',
     icon: <BsBook className="h-4 w-4" />,
   },
   {

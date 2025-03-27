@@ -1,4 +1,4 @@
-export interface TagData {
+export interface TagType {
   id: number
   name: string
   adminId: number

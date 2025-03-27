@@ -21,3 +21,13 @@ export type ArticlePageParams = {
   state?: number
   title?: string
 }
+
+export interface ArticleAddType {
+  title: string
+  summary: string
+  content: string
+  coverImage: string
+  state: number
+  categoryId: number
+  tagIds: number[]
+}

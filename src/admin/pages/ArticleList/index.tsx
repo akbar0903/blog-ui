@@ -2,13 +2,16 @@ import { Button, Card, CardBody } from '@heroui/react'
 import { ArticleData, ArticlePageParams } from '@/types'
 import { useEffect, useState } from 'react'
 import { getArticleListAPI } from '@/apis/article.ts'
-import ArticleTable from '@/admin/pages/article/ArticleTable'
-import ArticleSearchBar from '@/admin/pages/article/ArticleSearchBar'
+import ArticleTable from '@/admin/pages/ArticleList/ArticleTable'
+import ArticleSearchBar from '@/admin/pages/ArticleList/ArticleSearchBar'
 import CustomPagination from '@/admin/components/CustomPagination.tsx'
+import { useNavigate } from 'react-router-dom'
 
 export default function ArticleList() {
   const [articles, setArticles] = useState<ArticleData[]>([])
   const [total, setTotal] = useState(0)
+
+  const navigate = useNavigate()
 
   // 文章信息请求参数
   const [articlePageParams, setArticlePageParams] = useState<ArticlePageParams>({
@@ -54,7 +57,9 @@ export default function ArticleList() {
             articlePageParams={articlePageParams}
             onArticleFilterChange={setArticlePageParams}
           />
-          <Button color="primary">添加文章</Button>
+          <Button onPress={() => navigate('/admin/article-add')} color="primary" className="ml-4">
+            添加文章
+          </Button>
         </div>
 
         {/*文章列表*/}

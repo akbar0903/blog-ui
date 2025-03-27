@@ -1,4 +1,4 @@
-import { CategoryData, TagData } from '@/types'
+import { CategoryType, TagType } from '@/types'
 import {
   Button,
   Card,
@@ -14,7 +14,7 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 import { GoClock } from 'react-icons/go'
 
 interface CategoryTagCardProps {
-  data: CategoryData | TagData
+  data: CategoryType | TagType
   onEdit: (id: number) => void
   onDelete: (id: number) => void
   className?: string

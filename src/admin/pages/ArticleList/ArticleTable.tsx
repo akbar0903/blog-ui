@@ -44,9 +44,17 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
 
     switch (columnKey) {
       case 'coverImage':
-        return <Image src={article.coverImage} alt={article.title} width={80} height={80} />
+        return (
+          <Image
+            src={article.coverImage}
+            alt={article.title}
+            width={80}
+            height={80}
+            className="object-cover"
+          />
+        )
       case 'title':
-        return <p className="font-bold text-nowrap">{article.title}</p>
+        return <p className="text-medium text-nowrap">{article.title}</p>
       case 'state':
         return (
           <Chip color={stateColorMap[article.state]} size="sm" variant="flat">
@@ -54,10 +62,10 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
           </Chip>
         )
       case 'categoryName':
-        return <p>{article.categoryName}</p>
+        return <p className="text-nowrap md:text-wrap">{article.categoryName}</p>
       case 'tagNames':
         return (
-          <div className="flex gap-1 flex-wrap">
+          <div className="flex flex-nowrap md:flex-wrap gap-1">
             {article.tagNames.map((tag, index) => (
               <Chip key={`${tag}-${index}`} size="sm">
                 {tag}
@@ -66,9 +74,9 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
           </div>
         )
       case 'createdTime':
-        return <p>{article.createdTime}</p>
+        return <p className="text-nowrap md:text-wrap">{article.createdTime}</p>
       case 'updatedTime':
-        return <p>{article.updatedTime}</p>
+        return <p className="text-nowrap md:text-wrap">{article.updatedTime}</p>
       case 'actions':
         return (
           <div className="relative flex items-center gap-3">

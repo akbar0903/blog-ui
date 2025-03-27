@@ -1,7 +1,7 @@
-import { CategoryData } from '@/types'
+import { CategoryType } from '@/types'
 import { request } from '@/utils'
 
-export const getCategoryListAPI = (): Promise<CategoryData[]> => {
+export const getCategoryListAPI = (): Promise<CategoryType[]> => {
   return request({
     url: '/category/list',
     method: 'GET',
@@ -37,7 +37,7 @@ export const updateCategoryAPI = (id: number, name: string): Promise<null> => {
 }
 
 // 回显分类
-export const getCategoryInfoAPI = (id: number): Promise<CategoryData> => {
+export const getCategoryInfoAPI = (id: number): Promise<CategoryType> => {
   return request({
     url: '/category/info',
     method: 'GET',

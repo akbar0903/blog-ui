@@ -69,7 +69,9 @@ export default function ImageWall(props: ImageWallProps) {
       {/* 图片列表 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-min">
         {/* 文件上传卡片 */}
-        <div className="relative w-full h-[300px] border border-dashed border-foreground-400 rounded-lg shadow-md flex justify-center items-center hover:bg-success-100 transition-colors">
+        <div
+          className={`relative w-full ${isArticleImageWall ? 'h-[200px]' : 'h-[300]'} border border-dashed border-foreground-400 rounded-lg shadow-md flex justify-center items-center hover:bg-success-100 transition-colors`}
+        >
           <input
             type="file"
             className="opacity-0 absolute inset-0 cursor-pointer"
@@ -82,7 +84,12 @@ export default function ImageWall(props: ImageWallProps) {
             key={image.id}
             className="relative flex items-center justify-center group rounded-[14px] overflow-hidden shadow-md"
           >
-            <Image src={image.url} alt="Image" height={300} className="object-cover" />
+            <Image
+              src={image.url}
+              alt="Image"
+              height={isArticleImageWall ? 200 : 300}
+              className="object-cover"
+            />
 
             {/* layer层 */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors z-10"></div>
@@ -111,7 +118,7 @@ export default function ImageWall(props: ImageWallProps) {
       </div>
 
       {/* 分页 */}
-      <div className="mt-8">
+      <div className={`${isArticleImageWall ? 'mt-4' : 'mt-8'}`}>
         <CustomPagination
           total={total}
           pageSize={pageParams.pageSize}

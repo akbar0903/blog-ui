@@ -1,14 +1,14 @@
-import { TagData } from '@/types'
+import { TagType } from '@/types'
 import { request } from '@/utils'
 
-export const getTagListAPI = (): Promise<TagData[]> => {
+export const getTagListAPI = (): Promise<TagType[]> => {
   return request({
     url: '/tag/list',
     method: 'GET',
   })
 }
 
-export const getTagInfoAPI = (id: number): Promise<TagData> => {
+export const getTagInfoAPI = (id: number): Promise<TagType> => {
   return request({
     url: '/tag/info',
     method: 'GET',
