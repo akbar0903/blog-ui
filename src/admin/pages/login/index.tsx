@@ -1,12 +1,13 @@
 import { addToast, Button, Card, CardBody, CardHeader, Form, Input } from '@heroui/react'
 import ThemeToggle from '@/front/components/ThemeToggle.tsx'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { IoArrowBack, IoEye, IoEyeOff } from 'react-icons/io5'
+import { IoArrowBack } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { fetchLogin } from '@/store/modules/admin.ts'
 import { LoginForm } from '@/types'
 import { AppDispatch } from '@/store'
+import PasswordInput from '@/admin/components/PasswordInput'
 
 export default function Login() {
   const [data, setData] = useState<LoginForm>({
@@ -14,7 +15,6 @@ export default function Login() {
     password: '',
   })
   const [isLoading, setIsLoading] = useState(false)
-  const [passwordVisible, setPasswordVisible] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
@@ -33,15 +33,11 @@ export default function Login() {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!data.username) {
-      addToast({ title: '请输入用户名', color: 'warning', timeout: 3000 })
-      return
-    }
-    if (!data.password) {
-      addToast({ title: '请输入密码', color: 'warning', timeout: 3000 })
+    if (!data.username || !data.password) {
+      addToast({ title: '请填写所有字段', color: 'warning', timeout: 3000 })
       return
     } else if (data.password.length < 6) {
-      addToast({ title: '密码必须大于6个字符', color: 'warning', timeout: 3000 })
+      addToast({ title: '密码至少大于6个字符', color: 'warning', timeout: 3000 })
       return
     }
 
@@ -82,28 +78,13 @@ export default function Login() {
               value={data.username}
               onChange={handleInputChange}
             />
-            <Input
+            <PasswordInput
               label="密码"
+              placeholder="请输入密码"
               name="password"
               labelPlacement="outside"
-              placeholder="请输入密码"
               value={data.password}
               onChange={handleInputChange}
-              endContent={
-                <button
-                  aria-label="toggle password visibility"
-                  className="focus:outline-none"
-                  type="button"
-                  onClick={() => setPasswordVisible(!passwordVisible)}
-                >
-                  {passwordVisible ? (
-                    <IoEye className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <IoEyeOff className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
-              type={passwordVisible ? 'text' : 'password'}
             />
             <Button fullWidth color="primary" type="submit" isLoading={isLoading}>
               登录

@@ -1,5 +1,5 @@
 import { request } from '@/utils'
-import { AdminInfo, LoginForm, UpdataAdmin } from '@/types'
+import { AdminInfo, LoginForm, UpdataAdmin, UpdatePasswordType } from '@/types'
 
 export const loginAPI = (data: LoginForm): Promise<string> => {
   return request({
@@ -20,6 +20,14 @@ export const updateAdminInfoAPI = (data: UpdataAdmin): Promise<null> => {
   return request({
     url: '/admin',
     method: 'PUT',
+    data: data,
+  })
+}
+
+export const updatePasswordAPI = (data: UpdatePasswordType): Promise<null> => {
+  return request({
+    url: '/admin',
+    method: 'PATCH',
     data: data,
   })
 }
