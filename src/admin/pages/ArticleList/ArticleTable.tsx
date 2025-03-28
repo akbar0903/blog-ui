@@ -1,3 +1,4 @@
+import ConfirmPopover from '@/admin/components/ConfirmPopover'
 import { ArticleData } from '@/types'
 import {
   Chip,
@@ -14,7 +15,7 @@ import {
 } from '@heroui/react'
 import { Key, useCallback } from 'react'
 import { BsBook } from 'react-icons/bs'
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
+import { FaRegEdit } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 // 表格列
@@ -37,9 +38,10 @@ const stateColorMap: Record<string, ChipProps['color']> = {
 
 interface ArticleTableProps {
   articles: ArticleData[]
+  onDelete: (id: number) => void
 }
 
-export default function ArticleTable({ articles }: ArticleTableProps) {
+export default function ArticleTable({ articles, onDelete }: ArticleTableProps) {
   const navigate = useNavigate()
 
   // 表格单元格渲染
@@ -95,15 +97,16 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
               </Button>
             </Tooltip>
             <Tooltip content="编辑">
-              <Button variant="light" isIconOnly size="sm">
+              <Button
+                variant="light"
+                isIconOnly
+                size="sm"
+                onPress={() => navigate(`/admin/article-add-edit/${article.id}`)}
+              >
                 <FaRegEdit className="w-4 h-4 text-default-400" />
               </Button>
             </Tooltip>
-            <Tooltip color="danger" content="删除">
-              <Button isIconOnly color="danger" variant="light" size="sm">
-                <FaRegTrashAlt className="w-4 h-4" />
-              </Button>
-            </Tooltip>
+            <ConfirmPopover onConfirm={() => onDelete(article.id)} isArticleDelete={true} />
           </div>
         )
     }

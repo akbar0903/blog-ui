@@ -1,17 +1,9 @@
 import { CategoryType, TagType } from '@/types'
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@heroui/react'
-import { ReactNode, useState } from 'react'
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
+import { Button, Card, CardBody, CardHeader, Divider } from '@heroui/react'
+import { ReactNode } from 'react'
+import { FaRegEdit } from 'react-icons/fa'
 import { GoClock } from 'react-icons/go'
+import ConfirmPopover from './ConfirmPopover'
 
 interface CategoryTagCardProps {
   data: CategoryType | TagType
@@ -24,8 +16,6 @@ interface CategoryTagCardProps {
 
 export default function CategoryTagCard(props: CategoryTagCardProps) {
   const { data, onEdit, onDelete, className, isHaveDivider = true, cardIcon } = props
-
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
   return (
     <Card className={`py-2 relative group ${className}`}>
@@ -47,31 +37,7 @@ export default function CategoryTagCard(props: CategoryTagCardProps) {
           </Button>
 
           {/* 删除 */}
-          <Popover isOpen={isPopoverOpen} onOpenChange={(open) => setIsPopoverOpen(open)}>
-            <PopoverTrigger>
-              <Button color="danger" variant="flat" size="sm" isIconOnly>
-                <FaRegTrashAlt className="h-4 w-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent>
-              <div className="px-1 py-2">
-                <h1 className="pb-2">请确认此操作！</h1>
-                <div className="flex gap-2">
-                  <Button size="sm" color="primary" onPress={() => onDelete(data.id)}>
-                    确定
-                  </Button>
-                  <Button
-                    size="sm"
-                    color="primary"
-                    variant="flat"
-                    onPress={() => setIsPopoverOpen(false)}
-                  >
-                    取消
-                  </Button>
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
+          <ConfirmPopover onConfirm={() => onDelete(data.id)} />
         </div>
       </CardHeader>
       {isHaveDivider && <Divider />}

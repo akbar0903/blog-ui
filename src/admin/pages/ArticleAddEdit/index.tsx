@@ -19,20 +19,22 @@ import {
 import CustomRadio from './CustomRadio'
 import CustomCheckbox from './CustomCheckbox'
 import { TiArrowBack } from 'react-icons/ti'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { ArticleAddType, CategoryType, TagType } from '@/types'
+import { ArticleAddEditType, CategoryType, TagType } from '@/types'
 import { getCategoryListAPI } from '@/apis/category'
 import { getTagListAPI } from '@/apis/tag'
 import ImageWall from '@/admin/components/ImageWall'
-import { addArticleAPI } from '@/apis/article'
+import { addArticleAPI, getArticleInfoAPI, updateArticleAPI } from '@/apis/article'
+import { getTagIdsAPI } from '@/apis'
 
-export default function ArticleAdd() {
-  const [articleAddParams, setArticleAddParams] = useState<Partial<ArticleAddType>>({})
+export default function ArticleAddEdit() {
+  const [articleParams, setArticleParams] = useState<Partial<ArticleAddEditType>>({})
   const [categories, setCategories] = useState<CategoryType[]>([])
   const [tags, setTags] = useState<TagType[]>([])
 
   const navigate = useNavigate()
+  const { id } = useParams()
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   // 获取分类列表和标签列表
@@ -48,11 +50,33 @@ export default function ArticleAdd() {
       }
     }
     fetchCategoriesAndTags()
-  }, [])
+
+    // 如果是编辑文章
+    if (id) {
+      const fetchArticleTagData = async () => {
+        try {
+          const articleData = await getArticleInfoAPI(Number(id))
+          const tagIdsData = await getTagIdsAPI(Number(id))
+          setArticleParams({
+            id: articleData.id,
+            title: articleData.title,
+            summary: articleData.summary,
+            content: articleData.content,
+            coverImage: articleData.coverImage,
+            categoryId: articleData.categoryId,
+            tagIds: tagIdsData,
+          })
+        } catch (error) {
+          console.error(error)
+        }
+      }
+      fetchArticleTagData()
+    }
+  }, [id])
 
   // 处理输入框变化
-  const handleChange = (field: keyof ArticleAddType, value: string) => {
-    setArticleAddParams((prev) => ({
+  const handleChange = (field: keyof ArticleAddEditType, value: string) => {
+    setArticleParams((prev) => ({
       ...prev,
       [field]: typeof value === 'string' ? value.trim() : value,
     }))
@@ -61,12 +85,21 @@ export default function ArticleAdd() {
   // 提交文章
   const handleSubmit = async () => {
     try {
-      await addArticleAPI(articleAddParams as ArticleAddType)
-      addToast({
-        title: '文章添加成功',
-        color: 'success',
-        timeout: 3000,
-      })
+      if (id) {
+        await updateArticleAPI(articleParams as ArticleAddEditType)
+        addToast({
+          title: '文章更新成功',
+          color: 'success',
+          timeout: 3000,
+        })
+      } else {
+        await addArticleAPI(articleParams as ArticleAddEditType)
+        addToast({
+          title: '文章添加成功',
+          color: 'success',
+          timeout: 3000,
+        })
+      }
       navigate('/admin/article-list')
     } catch (error) {
       addToast({
@@ -77,12 +110,12 @@ export default function ArticleAdd() {
     }
   }
 
-  // 监听 articleAddParams 变化，并在 `state` 存在时提交
   useEffect(() => {
-    if (articleAddParams.state !== undefined) {
+    // 只有在添加文章模式下（即没有 id），并且 state 不为 undefined 时自动提交
+    if (articleParams.state !== undefined) {
       handleSubmit()
     }
-  }, [articleAddParams])
+  }, [articleParams])
 
   return (
     <>
@@ -101,7 +134,7 @@ export default function ArticleAdd() {
             <span className="text-nowrap w-20">文章标题</span>
             <Input
               placeholder="请输入文章标题"
-              value={articleAddParams.title}
+              value={articleParams.title ?? ''}
               onChange={(e) => handleChange('title', e.target.value)}
             />
           </div>
@@ -112,7 +145,7 @@ export default function ArticleAdd() {
             <Textarea
               maxRows={28}
               placeholder="请输入文章内容..."
-              value={articleAddParams.content}
+              value={articleParams.content ?? ''}
               onChange={(e) => handleChange('content', e.target.value)}
             />
           </div>
@@ -122,7 +155,7 @@ export default function ArticleAdd() {
             <span className="text-nowrap w-20">文章摘要</span>
             <Textarea
               placeholder="请输入文章摘要..."
-              value={articleAddParams.summary}
+              value={articleParams.summary ?? ''}
               onChange={(e) => handleChange('summary', e.target.value)}
             />
           </div>
@@ -131,10 +164,11 @@ export default function ArticleAdd() {
           <div className="flex items-start gap-4">
             <span className="text-nowrap w-20">文章分类</span>
             <RadioGroup
+              defaultValue={String(articleParams.categoryId)}
               orientation="horizontal"
-              value={String(articleAddParams.categoryId)}
+              value={String(articleParams.categoryId)}
               onValueChange={(key) =>
-                setArticleAddParams((prev) => ({
+                setArticleParams((prev) => ({
                   ...prev,
                   categoryId: parseInt(key, 10),
                 }))
@@ -152,10 +186,11 @@ export default function ArticleAdd() {
           <div className="flex items-start gap-4">
             <span className="text-nowrap w-20">文章标签</span>
             <CheckboxGroup
+              defaultValue={articleParams.tagIds?.map(String) || []}
               orientation="horizontal"
-              value={articleAddParams.tagIds?.map(String) || []} // number[] 转 string[]
+              value={articleParams.tagIds?.map(String) || []} // number[] 转 string[]
               onValueChange={(key) =>
-                setArticleAddParams((prev) => ({
+                setArticleParams((prev) => ({
                   ...prev,
                   tagIds: key.map(Number), // string[] 转 number[]
                 }))
@@ -174,10 +209,10 @@ export default function ArticleAdd() {
             <span className="text-nowrap w-20">文章封面</span>
             <div className="flex flex-col gap-4 relative">
               <div
-                className={`${articleAddParams.coverImage ? '' : 'border-2 border-dashed rounded-[13px]'}`}
+                className={`${articleParams.coverImage ? '' : 'border-2 border-dashed rounded-[13px]'}`}
               >
                 <Image
-                  src={articleAddParams.coverImage}
+                  src={articleParams.coverImage}
                   width={144}
                   height={144}
                   className="object-cover"
@@ -194,7 +229,7 @@ export default function ArticleAdd() {
               color="primary"
               variant="flat"
               onPress={() => {
-                setArticleAddParams((prev) => ({
+                setArticleParams((prev) => ({
                   ...prev,
                   state: 0,
                 }))
@@ -205,13 +240,13 @@ export default function ArticleAdd() {
             <Button
               color="primary"
               onPress={() => {
-                setArticleAddParams((prev) => ({
+                setArticleParams((prev) => ({
                   ...prev,
                   state: 1,
                 }))
               }}
             >
-              发布
+              {id ? '更新并发布' : '发布'}
             </Button>
           </div>
         </CardBody>
@@ -227,7 +262,7 @@ export default function ArticleAdd() {
                 <ImageWall
                   isArticleImageWall={true}
                   handleSelect={(url) => {
-                    setArticleAddParams((prev) => ({
+                    setArticleParams((prev) => ({
                       ...prev,
                       coverImage: url,
                     }))

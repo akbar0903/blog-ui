@@ -1,4 +1,4 @@
-import { ArticleAddType, ArticleData, ArticlePageParams, PageResult } from '@/types'
+import { ArticleAddEditType, ArticleData, ArticlePageParams, PageResult } from '@/types'
 import { request } from '@/utils'
 
 export const getArticleListAPI = (data: ArticlePageParams): Promise<PageResult<ArticleData[]>> => {
@@ -9,7 +9,7 @@ export const getArticleListAPI = (data: ArticlePageParams): Promise<PageResult<A
   })
 }
 
-export const addArticleAPI = (data: ArticleAddType): Promise<null> => {
+export const addArticleAPI = (data: ArticleAddEditType): Promise<null> => {
   return request({
     url: '/article',
     method: 'POST',
@@ -24,5 +24,20 @@ export const getArticleInfoAPI = (id: number): Promise<ArticleData> => {
     params: {
       id: id,
     },
+  })
+}
+
+export const deleteArticleAPI = (id: number): Promise<null> => {
+  return request({
+    url: `/article/${id}`,
+    method: 'DELETE',
+  })
+}
+
+export const updateArticleAPI = (data: ArticleAddEditType): Promise<null> => {
+  return request({
+    url: '/article',
+    method: 'PUT',
+    data: data,
   })
 }

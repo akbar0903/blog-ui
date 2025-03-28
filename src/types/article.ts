@@ -8,8 +8,10 @@ export type ArticleData = {
   content: string
   coverImage: string
   state: number
+  categoryId: number
   categoryName: string
   tagNames: string[]
+  tagIds: number[]
   createdTime: string
   updatedTime: string
 }
@@ -22,7 +24,8 @@ export type ArticlePageParams = {
   title?: string
 }
 
-export interface ArticleAddType {
+export interface ArticleAddEditType {
+  id?: number
   title: string
   summary: string
   content: string

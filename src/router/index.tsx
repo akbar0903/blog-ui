@@ -14,7 +14,7 @@ const Login = lazy(() => import('@/admin/pages/login'))
 const AdminHome = lazy(() => import('@/admin/pages/home'))
 const ArticleList = lazy(() => import('@/admin/pages/ArticleList'))
 const ArticlePreview = lazy(() => import('@/admin/pages/ArticlePreview'))
-const ArticleAdd = lazy(() => import('@/admin/pages/ArticleAdd'))
+const ArticleAddEdit = lazy(() => import('@/admin/pages/ArticleAddEdit'))
 const Category = lazy(() => import('@/admin/pages/category'))
 const Tag = lazy(() => import('@/admin/pages/tag'))
 const Image = lazy(() => import('@/admin/pages/image'))
@@ -67,8 +67,8 @@ const router = createBrowserRouter([
         element: <ArticlePreview />,
       },
       {
-        path: 'article-add',
-        element: <ArticleAdd />,
+        path: 'article-add-edit/:id?',
+        element: <ArticleAddEdit />,
       },
       {
         path: 'category',
