@@ -16,3 +16,13 @@ export const addArticleAPI = (data: ArticleAddType): Promise<null> => {
     data: data,
   })
 }
+
+export const getArticleInfoAPI = (id: number): Promise<ArticleData> => {
+  return request({
+    url: '/article/info',
+    method: 'GET',
+    params: {
+      id: id,
+    },
+  })
+}

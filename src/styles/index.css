@@ -44,3 +44,66 @@ body {
     animation: blink 0.8s step-end infinite;
   }
 }
+
+/* 控制代码块儿行号的宽度 */
+.linenumber.react-syntax-highlighter-line-number {
+  min-width: 3.25rem !important;
+}
+
+/* react-markdown扩展语法 */
+.alert {
+  @apply relative px-2 md:px-4 py-1 rounded-lg mb-4
+}
+.alert p {
+  @apply my-2 md:my-4;
+}
+
+.alert-danger,
+.alert-warning,
+.alert-info,
+.alert-success {
+  @apply border-l-4;
+}
+
+.alert-danger {
+  @apply bg-danger/10 border-l-danger text-danger;
+}
+
+.alert-warning {
+  @apply bg-warning/10 border-l-warning text-warning;
+}
+
+.alert-info {
+  @apply bg-primary/10 border-l-primary text-primary;
+}
+
+.alert-success {
+  @apply bg-success/10 border-l-success text-success;
+}
+
+/* 为不同类型添加伪元素文字 */
+.alert-danger::before,
+.alert-warning::before,
+.alert-info::before,
+.alert-success::before {
+  @apply block font-bold mt-2 text-xl;
+}
+.alert-danger::before {
+  content: "警告";
+  @apply text-danger; 
+}
+
+.alert-warning::before {
+  content: "注意";
+  @apply text-warning;
+}
+
+.alert-info::before {
+  content: "提示";
+  @apply text-primary;
+}
+
+.alert-success::before {
+  content: "成功";
+  @apply text-success;
+}

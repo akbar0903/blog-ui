@@ -13,6 +13,7 @@ const FrontAbout = lazy(() => import('@/front/pages/FrontAbout.tsx'))
 const Login = lazy(() => import('@/admin/pages/login'))
 const AdminHome = lazy(() => import('@/admin/pages/home'))
 const ArticleList = lazy(() => import('@/admin/pages/ArticleList'))
+const ArticlePreview = lazy(() => import('@/admin/pages/ArticlePreview'))
 const ArticleAdd = lazy(() => import('@/admin/pages/ArticleAdd'))
 const Category = lazy(() => import('@/admin/pages/category'))
 const Tag = lazy(() => import('@/admin/pages/tag'))
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: 'article-list',
         element: <ArticleList />,
+      },
+      {
+        path: 'article-preview/:id',
+        element: <ArticlePreview />,
       },
       {
         path: 'article-add',

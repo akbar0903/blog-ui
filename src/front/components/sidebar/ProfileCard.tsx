@@ -2,7 +2,7 @@ import { Card, CardBody, Image } from '@heroui/react'
 import { FaBilibili } from 'react-icons/fa6'
 import { LuGithub } from 'react-icons/lu'
 import { SiGitee } from 'react-icons/si'
-import mofeiImage from '@/front/assets/Mofei1-cut.jpg'
+import mofeiImage from '@/assets/Mofei1-cut.jpg'
 
 export default function ProfileCard() {
   return (

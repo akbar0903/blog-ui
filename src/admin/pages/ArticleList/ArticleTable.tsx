@@ -10,10 +10,12 @@ import {
   Tooltip,
   Image,
   ChipProps,
+  Button,
 } from '@heroui/react'
 import { Key, useCallback } from 'react'
 import { BsBook } from 'react-icons/bs'
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 // 表格列
 const columns = [
@@ -38,6 +40,8 @@ interface ArticleTableProps {
 }
 
 export default function ArticleTable({ articles }: ArticleTableProps) {
+  const navigate = useNavigate()
+
   // 表格单元格渲染
   const renderCell = useCallback((article: ArticleData, columnKey: Key) => {
     if (!article) return null
@@ -79,21 +83,26 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
         return <p className="text-nowrap md:text-wrap">{article.updatedTime}</p>
       case 'actions':
         return (
-          <div className="relative flex items-center gap-3">
+          <div className="relative flex items-center">
             <Tooltip content="预览">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <BsBook />
-              </span>
+              <Button
+                variant="light"
+                size="sm"
+                isIconOnly
+                onPress={() => navigate(`/admin/article-preview/${article.id}`)}
+              >
+                <BsBook className="w-4 h-4 text-default-400" />
+              </Button>
             </Tooltip>
             <Tooltip content="编辑">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <FaRegEdit />
-              </span>
+              <Button variant="light" isIconOnly size="sm">
+                <FaRegEdit className="w-4 h-4 text-default-400" />
+              </Button>
             </Tooltip>
             <Tooltip color="danger" content="删除">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <FaRegTrashAlt />
-              </span>
+              <Button isIconOnly color="danger" variant="light" size="sm">
+                <FaRegTrashAlt className="w-4 h-4" />
+              </Button>
             </Tooltip>
           </div>
         )
