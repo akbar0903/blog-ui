@@ -78,7 +78,7 @@ export default function ArticleAddEdit() {
   const handleChange = (field: keyof ArticleAddEditType, value: string) => {
     setArticleParams((prev) => ({
       ...prev,
-      [field]: typeof value === 'string' ? value.trim() : value,
+      [field]: typeof value === 'string' ? value : value,
     }))
   }
 

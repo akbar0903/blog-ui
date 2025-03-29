@@ -25,3 +25,34 @@ animate-blink是用于实现闪烁效果的动画类。
 - **revert：**回滚之前的提交（Revert）
 
 ## 2.路由守卫（高阶组件）
+
+
+## 3.react-markdown获取文件名
+```js
+const fileNameMatch = code.match(/^\/\/\s*File:\s*(.+?)\s*$|^#\s*File:\s*(.+?)\s*$/m)
+```
+**可以匹配**：
+- `// File: example.js`
+- `//File: example.js`
+- `// File: example.js`
+- `# File: example.py`
+- `#File: example.py`
+- `# File: example.py`
+## 4.react-markdown高亮代码块中的某个行
+```java
+// File:Example.java
+public class Example {
+  public static void main(String[], args) {
+    // 下面是正确的输出示例
+    System.out.println("Hello World"); // highlight-success
+
+    // 下面是错误的输出示例，没有写System.out
+    println("Hello World"); // highlight-error
+  }
+}
+```
+**可以匹配**：
+- `// highlight-error`
+- `//highlight-error`
+- `# highlight-success`
+- `#highlight-success`

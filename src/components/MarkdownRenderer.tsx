@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { LuChevronDown, LuChevronRight, LuCopy, LuCopyCheck } from 'react-icons/lu'
-import { useState } from 'react'
+import { CSSProperties, useState } from 'react'
 import { Button } from '@heroui/react'
 import remarkDirective from 'remark-directive'
 import { visit } from 'unist-util-visit'
@@ -13,7 +13,7 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="prose prose-base md:prose-lg max-w-none dark:prose-invert prose-pre:p-0 prose-pre:my-4 prose-h1:text-xl md:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h2:text-lg md:prose-h2:text-xl lg:prose-h2:text-2xl prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg prose-p:before:content-none prose-p:after:content-none prose-blockquote:border-l-4 prose-blockquote:border-l-primary">
+    <div className="prose prose-base md:prose-lg max-w-none dark:prose-invert prose-pre:p-0 prose-pre:my-4 prose-pre:rounded-lg prose-h1:text-xl md:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h2:text-lg md:prose-h2:text-xl lg:prose-h2:text-2xl prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg prose-p:before:content-none prose-p:after:content-none prose-p:my-2 prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-ul:my-2 prose-li:my-2">
       <ReactMarkdown
         remarkPlugins={[remarkDirective, remarkCustomDirectives]}
         components={{
@@ -48,17 +48,32 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
   const fileNameMatch = code.match(/^\/\/\s*File:\s*(.+?)\s*$|^#\s*File:\s*(.+?)\s*$/m)
   const fileName = fileNameMatch ? fileNameMatch[1] || fileNameMatch[2] : null
 
-  // 如果检测到文件名，则从代码中移除这一行
-  const displayCode = fileName
-    ? code
-        .split('\n')
-        .filter((_, i) => i !== 0)
-        .join('\n')
-    : code
+  // 解析代码，移除文件名和高亮标记
+  const parseHighlightedCode = (code: string) => {
+    const lines = code.split('\n')
+    const highlights: Record<number, string> = {} // 记录需要高亮的行号及类型
+    const highlightRegex = /(\s*(\/\/|#)\s*highlight-(error|success))/i
 
+    const cleanedLines = lines.map((line, index) => {
+      const match = line.match(highlightRegex)
+      if (match) {
+        highlights[index + 1] = match[3] // 记录高亮类型
+        return line.replace(highlightRegex, '') // 移除标记
+      }
+      return line
+    })
+
+    return { cleanedCode: cleanedLines.join('\n'), highlights }
+  }
+
+  const { cleanedCode, highlights } = parseHighlightedCode(
+    fileName ? code.split('\n').slice(1).join('\n') : code
+  )
+
+  // 复制代码
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(code)
+      await navigator.clipboard.writeText(cleanedCode)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000) // 2 秒后恢复原状态
     } catch (err) {
@@ -110,8 +125,21 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
                 'JetBrains Mono, Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace ',
             },
           }}
+          wrapLines={true}
+          lineProps={(lineNumber) => {
+            const type = highlights[lineNumber]
+            const style: CSSProperties = { display: 'block' }
+            if (type) {
+              const colors: Record<string, string> = {
+                error: 'rgba(239, 68, 68, 0.2)',
+                success: 'rgba(34, 197, 94, 0.2)',
+              }
+              style.backgroundColor = colors[type]
+            }
+            return { style }
+          }}
         >
-          {displayCode}
+          {cleanedCode}
         </SyntaxHighlighter>
       )}
     </div>
