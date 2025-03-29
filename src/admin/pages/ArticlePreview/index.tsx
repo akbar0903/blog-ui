@@ -1,5 +1,6 @@
 import { getArticleInfoAPI } from '@/apis/article'
 import ArticleDetail from '@/components/ArticleDetail'
+import TableOfContents from '@/components/TableOfContents'
 import { ArticleData } from '@/types'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -32,5 +33,17 @@ export default function ArticlePreview() {
     return <p>加载中...</p>
   }
 
-  return <ArticleDetail backHref="/admin/article-list" article={article as ArticleData} />
+  return (
+    <div className="flex">
+      {/* 左侧文章内容 */}
+      <div className="flex-1">
+        <ArticleDetail backHref="/admin/article-list" article={article as ArticleData} />
+      </div>
+
+      {/* 右侧目录 */}
+      <div className="w-80 ml-8">
+        <TableOfContents content={article.content || ''} />
+      </div>
+    </div>
+  )
 }

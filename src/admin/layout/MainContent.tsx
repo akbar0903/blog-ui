@@ -11,7 +11,7 @@ export default function MainContent({ isOpen }: Props) {
     <div
       className={` ${isOpen ? 'ml-40' : 'ml-0'} h-[calc(100vh-64px)] bg-white dark:bg-zinc-900 transition-all duration-300 ease-in-out overflow-hidden`}
     >
-      <div className="main-container p-5 bg-slate-100 dark:bg-zinc-950 h-full border-tl rounded-tl-[30px] overflow-y-auto">
+      <div className="main-container p-5 bg-slate-100 dark:bg-zinc-950 h-full border-tl rounded-tl-[30px] overflow-y-scroll scroll-smooth">
         <Suspense
           fallback={
             <Spinner

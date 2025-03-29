@@ -12,6 +12,7 @@ html {
   @apply bg-gradient-to-b from-primary/15 via-background to-success-100/20;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  scroll-behavior: smooth;
 }
 
 body {

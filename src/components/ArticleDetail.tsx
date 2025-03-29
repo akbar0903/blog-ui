@@ -62,7 +62,6 @@ export default function ArticleDetail({ article, backHref }: ArticleDetailProps)
           </div>
 
           {/* Article 内容 */}
-          {/*<div className="prose prose-lg max-w-none">{article.content}</div>*/}
           <MarkdownRenderer content={article.content} />
 
           {/* Tags */}
