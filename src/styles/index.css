@@ -45,11 +45,6 @@ body {
   }
 }
 
-/* 控制代码块儿行号的宽度 */
-.linenumber.react-syntax-highlighter-line-number {
-  min-width: 3.25rem !important;
-}
-
 /* react-markdown扩展语法 */
 .alert {
   @apply relative px-2 md:px-4 py-1 rounded-lg mb-4

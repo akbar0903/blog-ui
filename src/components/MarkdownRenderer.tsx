@@ -13,7 +13,7 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="prose prose-base md:prose-lg max-w-none dark:prose-invert prose-pre:p-0 prose-pre:my-4 prose-h1:text-xl md:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h2:text-lg md:prose-h2:text-xl lg:prose-h2:text-2xl prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg">
+    <div className="prose prose-base md:prose-lg max-w-none dark:prose-invert prose-pre:p-0 prose-pre:my-4 prose-h1:text-xl md:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h2:text-lg md:prose-h2:text-xl lg:prose-h2:text-2xl prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg prose-p:before:content-none prose-p:after:content-none prose-blockquote:border-l-4 prose-blockquote:border-l-primary">
       <ReactMarkdown
         remarkPlugins={[remarkDirective, remarkCustomDirectives]}
         components={{
@@ -44,6 +44,18 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
   const [copied, setCopied] = useState(false)
   const [isExpanded, setIsExpanded] = useState(true)
 
+  // 从代码中提取文件名（支持多种注释格式）
+  const fileNameMatch = code.match(/^\/\/\s*File:\s*(.+?)\s*$|^#\s*File:\s*(.+?)\s*$/m)
+  const fileName = fileNameMatch ? fileNameMatch[1] || fileNameMatch[2] : null
+
+  // 如果检测到文件名，则从代码中移除这一行
+  const displayCode = fileName
+    ? code
+        .split('\n')
+        .filter((_, i) => i !== 0)
+        .join('\n')
+    : code
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(code)
@@ -68,7 +80,7 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
             )}
           </button>
           {/* 语言名称 */}
-          <span className="md:!text-lg">{language}</span>
+          <span className="md:!text-lg">{fileName || language}</span>
         </div>
 
         {/* 复制按钮 */}
@@ -89,8 +101,17 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
           PreTag="div"
           className="!m-0 !px-0 !text-base md:!text-lg !rounded-t-none"
           showLineNumbers={true}
+          lineNumberStyle={{
+            minWidth: '3.25rem',
+          }}
+          codeTagProps={{
+            style: {
+              fontFamily:
+                'JetBrains Mono, Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace ',
+            },
+          }}
         >
-          {code}
+          {displayCode}
         </SyntaxHighlighter>
       )}
     </div>
